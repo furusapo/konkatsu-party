@@ -8,22 +8,26 @@
 
   <meta
     name="description"
-    content="結婚相手探しだけでなく、住まい・保険・家計・子育てまで。FP2級、不動産・保険の知識と実体験をもつ代表が、人生設計をまるごとサポートする大阪の結婚相談所です。"
+    content="結婚相手探しだけでなく、住まい・保険・家計・再婚・子育てまで。FP2級、不動産・保険の知識と家族を育てた実体験を持つ代表が、結婚の先の人生まで支える大阪の結婚相談所です。"
   >
 
   <style>
     :root {
-      --pink: #ef6f89;
-      --pink-dark: #d94f6c;
+      --pink: #ef718a;
+      --pink-dark: #d8516d;
+      --pink-deep: #b93f59;
       --pink-soft: #fff0f3;
+      --pink-pale: #fff8fa;
       --cream: #fffaf5;
-      --gold: #cfa64d;
+      --gold: #d5ad57;
+      --gold-soft: #fff7e6;
       --brown: #49362f;
-      --text: #4b3d41;
-      --muted: #83757a;
+      --brown-light: #725f58;
+      --text: #4d3f43;
+      --muted: #84777b;
       --white: #ffffff;
       --border: #f0dce1;
-      --green: #608d7a;
+      --shadow: 0 24px 70px rgba(94, 60, 70, .12);
     }
 
     * {
@@ -44,7 +48,7 @@
         "Yu Gothic",
         "Meiryo",
         sans-serif;
-      line-height: 1.8;
+      line-height: 1.85;
       background: var(--cream);
     }
 
@@ -65,25 +69,45 @@
     }
 
     .container {
-      width: min(1120px, calc(100% - 40px));
+      width: min(1180px, calc(100% - 40px));
       margin: 0 auto;
+    }
+
+    .section {
+      padding: 104px 0;
+    }
+
+    .section-white {
+      background: var(--white);
+    }
+
+    .section-soft {
+      background:
+        radial-gradient(circle at top left, rgba(255, 226, 234, .7), transparent 30%),
+        var(--pink-pale);
+    }
+
+    .section-cream {
+      background:
+        radial-gradient(circle at bottom right, rgba(255, 236, 197, .7), transparent 30%),
+        var(--cream);
     }
 
     .site-header {
       position: sticky;
       top: 0;
-      z-index: 100;
-      border-bottom: 1px solid rgba(239, 111, 137, .14);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(239, 113, 138, .13);
       background: rgba(255, 255, 255, .94);
       backdrop-filter: blur(18px);
     }
 
     .header-inner {
-      min-height: 74px;
+      min-height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 26px;
     }
 
     .logo {
@@ -101,81 +125,93 @@
     .logo-sub {
       display: block;
       color: var(--pink-dark);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .12em;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .16em;
     }
 
     .nav {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 26px;
     }
 
     .nav a {
-      color: #615258;
+      color: #65565b;
       text-decoration: none;
       font-size: 13px;
-      font-weight: 800;
+      font-weight: 900;
     }
 
-    .nav .header-cta {
-      padding: 11px 18px;
+    .nav-cta {
+      padding: 11px 19px;
       border-radius: 999px;
-      color: var(--white);
-      background: linear-gradient(135deg, #f17b92, #e55371);
-      box-shadow: 0 10px 24px rgba(217, 79, 108, .2);
+      color: var(--white) !important;
+      background: linear-gradient(135deg, #f27b93, #df506e);
+      box-shadow: 0 10px 26px rgba(217, 79, 108, .2);
     }
 
     .hero {
       position: relative;
       overflow: hidden;
-      padding: 88px 0 80px;
+      padding: 86px 0 78px;
       background:
-        radial-gradient(circle at 10% 0%, #ffe4eb 0, transparent 32%),
-        radial-gradient(circle at 100% 80%, #fff0cf 0, transparent 30%),
-        #fffaf8;
+        radial-gradient(circle at 10% 0%, #ffe7ed 0, transparent 34%),
+        radial-gradient(circle at 95% 85%, #fff0ce 0, transparent 31%),
+        linear-gradient(180deg, #fffdfc, #fff8f6);
     }
 
-    .hero::before {
+    .hero::before,
+    .hero::after {
       position: absolute;
-      top: 80px;
-      right: -130px;
-      width: 380px;
-      height: 380px;
-      border: 1px solid rgba(207, 166, 77, .24);
+      border: 1px solid rgba(213, 173, 87, .22);
       border-radius: 50%;
       content: "";
     }
 
+    .hero::before {
+      top: 70px;
+      right: -150px;
+      width: 430px;
+      height: 430px;
+    }
+
+    .hero::after {
+      bottom: -210px;
+      left: -120px;
+      width: 390px;
+      height: 390px;
+    }
+
     .hero-grid {
       position: relative;
+      z-index: 2;
       display: grid;
-      grid-template-columns: 1.08fr .92fr;
+      grid-template-columns: 1.03fr .97fr;
       align-items: center;
-      gap: 60px;
+      gap: 66px;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 20px;
-      padding: 7px 15px;
+      margin-bottom: 22px;
+      padding: 8px 16px;
       border-radius: 999px;
       color: var(--pink-dark);
       background: var(--pink-soft);
       font-size: 12px;
       font-weight: 900;
-      letter-spacing: .12em;
+      letter-spacing: .13em;
     }
 
     .hero h1 {
-      margin: 0 0 24px;
+      margin: 0 0 25px;
       color: var(--brown);
-      font-size: clamp(40px, 6vw, 68px);
-      line-height: 1.25;
-      letter-spacing: .03em;
+      font-size: clamp(42px, 6vw, 70px);
+      line-height: 1.22;
+      letter-spacing: .02em;
     }
 
     .hero h1 span {
@@ -185,9 +221,28 @@
     .hero-lead {
       max-width: 650px;
       margin: 0 0 30px;
-      color: #6d5c62;
+      color: #6c5a60;
       font-size: 18px;
       line-height: 2;
+    }
+
+    .hero-point {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .hero-point div {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: var(--brown-light);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .hero-point span:first-child {
+      color: var(--pink-dark);
     }
 
     .hero-buttons {
@@ -198,10 +253,10 @@
 
     .button {
       display: inline-flex;
-      min-height: 56px;
+      min-height: 57px;
       align-items: center;
       justify-content: center;
-      padding: 0 28px;
+      padding: 0 30px;
       border-radius: 999px;
       text-decoration: none;
       font-weight: 900;
@@ -214,58 +269,64 @@
 
     .button-primary {
       color: var(--white);
-      background: linear-gradient(135deg, #f17b92, #e55371);
-      box-shadow: 0 14px 30px rgba(217, 79, 108, .22);
+      background: linear-gradient(135deg, #f27b93, #df506e);
+      box-shadow: 0 15px 32px rgba(217, 79, 108, .24);
     }
 
     .button-secondary {
       border: 1px solid var(--border);
       color: var(--brown);
       background: var(--white);
+      box-shadow: 0 10px 24px rgba(90, 60, 68, .07);
+    }
+
+    .hero-visual {
+      position: relative;
     }
 
     .hero-card {
-      position: relative;
-      padding: 18px;
-      border: 1px solid rgba(255, 255, 255, .8);
-      border-radius: 32px;
-      background: rgba(255, 255, 255, .72);
-      box-shadow: 0 28px 70px rgba(101, 65, 76, .16);
-      backdrop-filter: blur(10px);
+      padding: 17px;
+      border: 1px solid rgba(255, 255, 255, .9);
+      border-radius: 34px;
+      background: rgba(255, 255, 255, .78);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
     }
 
     .hero-card img {
       width: 100%;
-      border-radius: 22px;
+      border-radius: 24px;
     }
 
-    .hero-badge {
+    .hero-mini-card {
       position: absolute;
-      right: -18px;
+      left: -34px;
       bottom: 34px;
-      width: 148px;
-      height: 148px;
-      display: grid;
-      place-items: center;
-      border: 5px solid rgba(255, 255, 255, .8);
-      border-radius: 50%;
-      color: var(--white);
-      background: var(--pink);
-      text-align: center;
-      font-size: 14px;
-      font-weight: 900;
-      line-height: 1.55;
-      box-shadow: 0 18px 40px rgba(217, 79, 108, .25);
+      max-width: 250px;
+      padding: 18px 20px;
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 18px;
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 18px 45px rgba(88, 55, 64, .16);
     }
 
-    .hero-badge strong {
+    .hero-mini-card strong {
       display: block;
-      font-size: 24px;
+      margin-bottom: 5px;
+      color: var(--brown);
+      font-size: 16px;
+    }
+
+    .hero-mini-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
     }
 
     .trust-strip {
-      border-top: 1px solid #f2e2e5;
-      border-bottom: 1px solid #f2e2e5;
+      border-top: 1px solid #f1e2e5;
+      border-bottom: 1px solid #f1e2e5;
       background: var(--white);
     }
 
@@ -275,7 +336,7 @@
     }
 
     .trust-item {
-      padding: 28px 16px;
+      padding: 29px 16px;
       text-align: center;
     }
 
@@ -294,23 +355,9 @@
       font-size: 12px;
     }
 
-    .section {
-      padding: 96px 0;
-    }
-
-    .section-white {
-      background: var(--white);
-    }
-
-    .section-soft {
-      background:
-        radial-gradient(circle at top left, #ffeef2 0, transparent 26%),
-        #fffaf9;
-    }
-
     .section-heading {
       max-width: 780px;
-      margin: 0 auto 52px;
+      margin: 0 auto 56px;
       text-align: center;
     }
 
@@ -324,10 +371,10 @@
     }
 
     .section-heading h2 {
-      margin: 0 0 16px;
+      margin: 0 0 17px;
       color: var(--brown);
-      font-size: clamp(30px, 4vw, 44px);
-      line-height: 1.45;
+      font-size: clamp(31px, 4vw, 46px);
+      line-height: 1.5;
     }
 
     .section-heading p {
@@ -335,46 +382,82 @@
       color: var(--muted);
     }
 
-    .concept-box {
+    .worry-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .worry-card {
+      position: relative;
+      padding: 31px 26px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: var(--white);
+      box-shadow: 0 14px 36px rgba(90, 60, 68, .07);
+    }
+
+    .worry-number {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 18px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--pink-dark);
+      background: var(--pink-soft);
+      font-weight: 900;
+    }
+
+    .worry-card h3 {
+      margin: 0 0 10px;
+      color: var(--brown);
+      font-size: 19px;
+    }
+
+    .worry-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .concept-grid {
       display: grid;
       grid-template-columns: .9fr 1.1fr;
       align-items: center;
-      gap: 56px;
+      gap: 60px;
     }
 
-    .concept-visual {
+    .concept-image {
       position: relative;
-      min-height: 480px;
       overflow: hidden;
+      min-height: 530px;
       border-radius: 30px;
       background:
-        linear-gradient(rgba(70, 43, 47, .12), rgba(70, 43, 47, .3)),
+        linear-gradient(rgba(70, 43, 47, .08), rgba(70, 43, 47, .25)),
         url("assets/konkatsu-hero.png") center / cover;
-      box-shadow: 0 24px 60px rgba(85, 57, 65, .14);
+      box-shadow: var(--shadow);
     }
 
-    .concept-message {
+    .concept-image::after {
       position: absolute;
       right: 22px;
       bottom: 22px;
       left: 22px;
       padding: 22px;
-      border-radius: 20px;
+      border-radius: 18px;
       color: var(--white);
-      background: rgba(74, 48, 54, .72);
+      background: rgba(66, 44, 49, .76);
       backdrop-filter: blur(8px);
+      content: "結婚の先にある暮らしまで、同じ人に相談できる安心を。";
+      font-weight: 900;
+      line-height: 1.8;
     }
 
-    .concept-message strong {
-      display: block;
-      margin-bottom: 5px;
-      font-size: 22px;
-    }
-
-    .concept-copy h3 {
+    .concept-copy h2 {
       margin: 0 0 22px;
       color: var(--brown);
-      font-size: 32px;
+      font-size: clamp(31px, 4vw, 44px);
       line-height: 1.55;
     }
 
@@ -383,88 +466,117 @@
       color: #74666a;
     }
 
-    .highlight {
-      color: var(--pink-dark);
-      font-weight: 900;
+    .concept-highlight {
+      margin-top: 26px;
+      padding: 21px;
+      border-left: 4px solid var(--gold);
+      border-radius: 0 16px 16px 0;
+      background: var(--gold-soft);
     }
 
-    .service-grid {
+    .concept-highlight strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--brown);
+      font-size: 18px;
+    }
+
+    .support-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
+      gap: 17px;
     }
 
-    .service-card {
-      padding: 28px 20px;
+    .support-card {
+      padding: 30px 20px;
       border: 1px solid var(--border);
-      border-radius: 22px;
+      border-radius: 23px;
       background: var(--white);
       text-align: center;
-      box-shadow: 0 12px 32px rgba(91, 60, 70, .07);
+      box-shadow: 0 13px 35px rgba(90, 60, 68, .07);
     }
 
-    .service-icon {
-      width: 64px;
-      height: 64px;
+    .support-icon {
       display: grid;
-      margin: 0 auto 17px;
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 18px;
       place-items: center;
       border-radius: 50%;
       background: var(--pink-soft);
-      font-size: 27px;
+      font-size: 28px;
     }
 
-    .service-card h3 {
+    .support-card h3 {
       margin: 0 0 10px;
       color: var(--brown);
       font-size: 18px;
     }
 
-    .service-card p {
+    .support-card p {
       margin: 0;
       color: var(--muted);
       font-size: 13px;
       line-height: 1.75;
     }
 
-    .profile {
+    .profile-grid {
       display: grid;
-      grid-template-columns: .78fr 1.22fr;
-      gap: 56px;
+      grid-template-columns: .82fr 1.18fr;
       align-items: center;
+      gap: 62px;
     }
 
     .profile-card {
-      padding: 38px;
-      border-radius: 28px;
+      position: relative;
+      padding: 42px;
+      overflow: hidden;
+      border-radius: 30px;
       color: var(--white);
       background:
-        radial-gradient(circle at top right, rgba(255,255,255,.18), transparent 35%),
-        linear-gradient(145deg, #5a4640, #342927);
-      box-shadow: 0 24px 60px rgba(58, 42, 43, .2);
+        radial-gradient(circle at top right, rgba(255,255,255,.16), transparent 35%),
+        linear-gradient(145deg, #5d4942, #342925);
+      box-shadow: 0 26px 65px rgba(58, 42, 43, .2);
+    }
+
+    .profile-card::after {
+      position: absolute;
+      right: -70px;
+      bottom: -70px;
+      width: 210px;
+      height: 210px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 50%;
+      content: "";
     }
 
     .profile-photo {
-      width: 150px;
-      height: 150px;
+      position: relative;
+      z-index: 2;
       display: grid;
-      margin: 0 auto 22px;
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 23px;
       place-items: center;
       border: 3px solid rgba(255,255,255,.55);
       border-radius: 50%;
-      background: rgba(255,255,255,.12);
-      font-size: 56px;
+      background: rgba(255,255,255,.13);
+      font-size: 58px;
     }
 
     .profile-card h3 {
+      position: relative;
+      z-index: 2;
       margin: 0;
       text-align: center;
-      font-size: 24px;
+      font-size: 25px;
     }
 
     .profile-card p {
+      position: relative;
+      z-index: 2;
       margin: 8px 0 0;
-      color: rgba(255,255,255,.74);
+      color: rgba(255,255,255,.76);
       text-align: center;
       font-size: 13px;
     }
@@ -472,13 +584,13 @@
     .profile-copy h2 {
       margin: 0 0 22px;
       color: var(--brown);
-      font-size: clamp(30px, 4vw, 42px);
+      font-size: clamp(31px, 4vw, 44px);
       line-height: 1.5;
     }
 
     .profile-copy p {
       margin: 0 0 18px;
-      color: #74656a;
+      color: #74666a;
     }
 
     .qualification-list {
@@ -493,54 +605,55 @@
       gap: 11px;
       padding: 14px 16px;
       border-radius: 14px;
-      background: #fff6f8;
-      font-weight: 800;
+      background: #fff5f7;
+      font-weight: 900;
     }
 
     .qualification-item span:first-child {
       color: var(--pink-dark);
     }
 
-    .family-box {
-      margin-top: 22px;
-      padding: 20px;
-      border-left: 4px solid var(--gold);
-      border-radius: 0 16px 16px 0;
+    .experience-box {
+      margin-top: 23px;
+      padding: 22px;
+      border: 1px solid #f2e0bd;
+      border-radius: 17px;
       background: #fffaf0;
     }
 
-    .family-box strong {
+    .experience-box strong {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 7px;
       color: var(--brown);
+      font-size: 17px;
     }
 
     .flow-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      counter-reset: flow;
+      gap: 19px;
+      counter-reset: step;
     }
 
     .flow-card {
       position: relative;
-      padding: 28px 22px;
-      border-radius: 20px;
+      padding: 30px 23px;
+      border-radius: 21px;
       background: var(--white);
-      box-shadow: 0 12px 32px rgba(91, 60, 70, .07);
-      counter-increment: flow;
+      box-shadow: 0 13px 34px rgba(90, 60, 68, .07);
+      counter-increment: step;
     }
 
     .flow-card::before {
       display: grid;
-      width: 42px;
-      height: 42px;
-      margin-bottom: 16px;
+      width: 44px;
+      height: 44px;
+      margin-bottom: 17px;
       place-items: center;
       border-radius: 50%;
       color: var(--white);
       background: var(--pink);
-      content: counter(flow);
+      content: counter(step);
       font-weight: 900;
     }
 
@@ -558,16 +671,18 @@
 
     .party-panel {
       display: grid;
-      grid-template-columns: 1fr .9fr;
+      grid-template-columns: 1.04fr .96fr;
       overflow: hidden;
-      border-radius: 30px;
+      border-radius: 32px;
       color: var(--white);
-      background: linear-gradient(135deg, #ed7089, #d94f6c);
-      box-shadow: 0 24px 60px rgba(217, 79, 108, .2);
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,.16), transparent 34%),
+        linear-gradient(135deg, #ee748c, #d84e6b);
+      box-shadow: 0 25px 65px rgba(217, 79, 108, .22);
     }
 
     .party-copy {
-      padding: 52px;
+      padding: 58px;
     }
 
     .party-copy small {
@@ -576,14 +691,14 @@
     }
 
     .party-copy h2 {
-      margin: 10px 0 18px;
-      font-size: 36px;
+      margin: 11px 0 19px;
+      font-size: 38px;
       line-height: 1.45;
     }
 
     .party-copy p {
-      margin: 0 0 25px;
-      color: rgba(255,255,255,.85);
+      margin: 0 0 27px;
+      color: rgba(255,255,255,.87);
     }
 
     .party-panel img {
@@ -597,66 +712,117 @@
       background: var(--white);
     }
 
+    .faq-list {
+      display: grid;
+      max-width: 900px;
+      margin: 0 auto;
+      gap: 14px;
+    }
+
+    details {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: 0 9px 26px rgba(90, 60, 68, .05);
+    }
+
+    summary {
+      position: relative;
+      padding: 20px 54px 20px 22px;
+      color: var(--brown);
+      cursor: pointer;
+      list-style: none;
+      font-weight: 900;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      position: absolute;
+      top: 50%;
+      right: 22px;
+      content: "＋";
+      color: var(--pink-dark);
+      font-size: 22px;
+      transform: translateY(-50%);
+    }
+
+    details[open] summary::after {
+      content: "−";
+    }
+
+    .faq-answer {
+      padding: 0 22px 21px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
     .cta-section {
-      padding: 90px 0;
+      padding: 96px 0;
       text-align: center;
       background:
-        radial-gradient(circle at 20% 0%, #ffe4eb, transparent 30%),
-        radial-gradient(circle at 90% 100%, #fff0d0, transparent 30%),
+        radial-gradient(circle at 10% 0%, #ffe7ed, transparent 32%),
+        radial-gradient(circle at 92% 100%, #ffefcb, transparent 31%),
         var(--white);
     }
 
     .cta-box {
-      max-width: 850px;
+      max-width: 880px;
       margin: 0 auto;
-      padding: 60px 32px;
+      padding: 64px 34px;
       border: 1px solid var(--border);
-      border-radius: 32px;
-      background: rgba(255,255,255,.82);
-      box-shadow: 0 24px 70px rgba(90, 58, 68, .1);
+      border-radius: 34px;
+      background: rgba(255,255,255,.86);
+      box-shadow: var(--shadow);
     }
 
     .cta-box h2 {
-      margin: 0 0 16px;
+      margin: 0 0 17px;
       color: var(--brown);
-      font-size: clamp(30px, 5vw, 46px);
+      font-size: clamp(32px, 5vw, 48px);
       line-height: 1.5;
     }
 
     .cta-box p {
-      margin: 0 auto 28px;
-      max-width: 600px;
+      max-width: 630px;
+      margin: 0 auto 29px;
       color: var(--muted);
     }
 
-    .note {
+    .cta-note {
       margin-top: 17px;
-      color: #94878b;
+      color: #95888c;
       font-size: 11px;
     }
 
     footer {
-      padding: 38px 20px;
-      color: #897b80;
-      background: #392d2b;
+      padding: 40px 20px;
+      color: rgba(255,255,255,.66);
+      background: #382d2a;
       text-align: center;
       font-size: 12px;
     }
 
-    @media (max-width: 1000px) {
+    @media (max-width: 1050px) {
       .hero-grid,
-      .concept-box,
-      .profile,
+      .concept-grid,
+      .profile-grid,
       .party-panel {
         grid-template-columns: 1fr;
       }
 
       .hero-card {
-        max-width: 680px;
+        max-width: 720px;
         margin: 0 auto;
       }
 
-      .service-grid {
+      .hero-mini-card {
+        left: 18px;
+      }
+
+      .support-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
@@ -665,30 +831,34 @@
       }
 
       .party-panel img {
-        max-height: 460px;
+        max-height: 500px;
       }
     }
 
-    @media (max-width: 720px) {
-      .nav a:not(.header-cta) {
+    @media (max-width: 760px) {
+      .container {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .nav a:not(.nav-cta) {
         display: none;
       }
 
-      .header-cta {
-        padding: 9px 14px !important;
+      .nav-cta {
+        padding: 9px 14px;
         font-size: 12px !important;
       }
 
       .hero {
-        padding: 55px 0 60px;
+        padding: 57px 0 64px;
       }
 
       .hero-grid {
-        gap: 36px;
+        gap: 39px;
       }
 
       .hero h1 {
-        font-size: 39px;
+        font-size: 40px;
       }
 
       .hero-lead {
@@ -703,16 +873,10 @@
         width: 100%;
       }
 
-      .hero-badge {
-        right: 8px;
-        bottom: 16px;
-        width: 116px;
-        height: 116px;
-        font-size: 11px;
-      }
-
-      .hero-badge strong {
-        font-size: 19px;
+      .hero-mini-card {
+        position: static;
+        max-width: none;
+        margin-top: 14px;
       }
 
       .trust-grid {
@@ -720,8 +884,8 @@
       }
 
       .trust-item:nth-child(3) {
-        border-left: 0;
         border-top: 1px solid #f0e5e7;
+        border-left: 0;
       }
 
       .trust-item:nth-child(4) {
@@ -729,32 +893,33 @@
       }
 
       .section {
-        padding: 70px 0;
+        padding: 74px 0;
       }
 
-      .service-grid,
+      .worry-grid,
+      .support-grid,
       .flow-grid {
         grid-template-columns: 1fr;
       }
 
-      .concept-visual {
-        min-height: 390px;
+      .concept-image {
+        min-height: 410px;
       }
 
       .profile-card {
-        padding: 30px 20px;
+        padding: 32px 22px;
       }
 
       .party-copy {
-        padding: 36px 24px;
+        padding: 39px 25px;
       }
 
       .party-copy h2 {
-        font-size: 29px;
+        font-size: 30px;
       }
 
       .cta-box {
-        padding: 45px 20px;
+        padding: 46px 21px;
       }
     }
   </style>
@@ -772,7 +937,8 @@
         <a href="#concept">私たちについて</a>
         <a href="#support">サポート</a>
         <a href="#representative">代表紹介</a>
-        <a class="header-cta" href="#contact">無料相談</a>
+        <a href="#faq">よくある質問</a>
+        <a class="nav-cta" href="#contact">無料相談</a>
       </nav>
     </div>
   </header>
@@ -781,19 +947,24 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow">♥ 結婚の先にある人生まで</div>
+          <div class="eyebrow">♥ 結婚の先の暮らしまで考える</div>
 
           <h1>
-            結婚だけじゃない。<br>
-            <span>人生を、まるごと。</span>
+            お相手探しだけでなく、<br>
+            <span>人生をまるごと。</span>
           </h1>
 
           <p class="hero-lead">
-            お相手探しはもちろん、住まい、保険、家計、
-            再婚、子育てまで。<br>
-            結婚後に始まる暮らしを見据えて、
-            あなたの人生設計に寄り添う結婚相談所です。
+            住まい、保険、家計、再婚、子育て。<br>
+            結婚後に始まる暮らしまで見据えて、
+            あなたとご家族の未来を一緒に考える結婚相談所です。
           </p>
+
+          <div class="hero-point">
+            <div><span>✓</span><span>不動産・FP・保険の知識を持つ代表が対応</span></div>
+            <div><span>✓</span><span>再婚・子連れ婚・子育ての不安にも寄り添います</span></div>
+            <div><span>✓</span><span>成婚後の住まいと生活設計まで相談できます</span></div>
+          </div>
 
           <div class="hero-buttons">
             <a class="button button-primary" href="#contact">
@@ -806,15 +977,20 @@
           </div>
         </div>
 
-        <div class="hero-card">
-          <img
-            src="assets/konkatsu-hero.png"
-            alt="自然に話せる婚活パーティー"
-          >
+        <div class="hero-visual">
+          <div class="hero-card">
+            <img
+              src="assets/konkatsu-hero.png"
+              alt="大阪で開催する婚活パーティー"
+            >
+          </div>
 
-          <div class="hero-badge">
-            結婚の先も
-            <strong>ずっと安心</strong>
+          <div class="hero-mini-card">
+            <strong>結婚後も相談できる安心</strong>
+            <p>
+              婚活だけで終わらず、住まいや家計、
+              保険のことまで継続して相談できます。
+            </p>
           </div>
         </div>
       </div>
@@ -824,7 +1000,7 @@
       <div class="container trust-grid">
         <div class="trust-item">
           <strong>不動産の専門知識</strong>
-          <span>結婚後の住まい選びまで</span>
+          <span>新生活の住まいまで</span>
         </div>
 
         <div class="trust-item">
@@ -834,115 +1010,147 @@
 
         <div class="trust-item">
           <strong>保険の知識</strong>
-          <span>家族を守る備えを考える</span>
+          <span>家族を守る備えまで</span>
         </div>
 
         <div class="trust-item">
-          <strong>子育ての実体験</strong>
-          <span>再婚や子連れ婚にも寄り添う</span>
+          <strong>家族を育てた経験</strong>
+          <span>再婚・子連れ婚にも対応</span>
         </div>
       </div>
     </section>
 
-    <section id="concept" class="section section-white">
+    <section class="section section-white">
       <div class="container">
         <div class="section-heading">
-          <small>OUR CONCEPT</small>
-          <h2>結婚相手を見つけるだけでは、<br>本当の安心とはいえないから。</h2>
+          <small>DO YOU HAVE THESE CONCERNS?</small>
+          <h2>こんな不安を、ひとりで抱えていませんか？</h2>
           <p>
-            結婚はゴールではなく、新しい暮らしのスタートです。
+            結婚を考えるときに生まれる悩みは、
+            お相手探しだけではありません。
           </p>
         </div>
 
-        <div class="concept-box">
-          <div class="concept-visual">
-            <div class="concept-message">
-              <strong>未来の暮らしまで一緒に考える。</strong>
-              出会いから結婚後まで、相談先が変わらない安心を。
-            </div>
-          </div>
-
-          <div class="concept-copy">
-            <h3>
-              「この人と結婚して、<br>
-              本当に幸せに暮らせるだろうか」
-            </h3>
-
+        <div class="worry-grid">
+          <article class="worry-card">
+            <div class="worry-number">01</div>
+            <h3>結婚後のお金が不安</h3>
             <p>
-              結婚を考えるとき、多くの方が不安になるのは、
-              お相手との相性だけではありません。
+              生活費、貯蓄、住宅購入、保険など、
+              将来の家計をどう考えればいいか分からない。
             </p>
+          </article>
 
+          <article class="worry-card">
+            <div class="worry-number">02</div>
+            <h3>再婚や子連れ婚に不安がある</h3>
             <p>
-              どこに住むのか。家を買うのか。家計はどうするのか。
-              保険は必要なのか。子どもを育てていけるのか。
+              子どもとの関係や相手の家族との付き合いについて、
+              理解してもらえる相談相手がほしい。
             </p>
+          </article>
 
+          <article class="worry-card">
+            <div class="worry-number">03</div>
+            <h3>結婚後の暮らしが想像できない</h3>
             <p>
-              私たちは、婚活だけを切り離して考えません。
-              <span class="highlight">
-                出会い、結婚、住まい、お金、家族の未来まで
-              </span>
-              一緒に整理します。
+              どこに住むのか、家を買うのか、
+              仕事や生活をどう組み立てるのか整理したい。
             </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="concept" class="section section-soft">
+      <div class="container concept-grid">
+        <div class="concept-image"></div>
+
+        <div class="concept-copy">
+          <div class="eyebrow">OUR CONCEPT</div>
+
+          <h2>
+            結婚はゴールではなく、<br>
+            新しい暮らしのスタート。
+          </h2>
+
+          <p>
+            一般的な結婚相談所では、
+            成婚した時点でサポートが終了することも少なくありません。
+          </p>
+
+          <p>
+            けれど、本当に悩むことが増えるのは、
+            結婚後の生活が始まってからかもしれません。
+          </p>
+
+          <p>
+            私たちは、出会いだけを切り離して考えません。
+            お相手探し、住まい、家計、保険、再婚、子育てまで、
+            あなたの人生をひとつの流れとして考えます。
+          </p>
+
+          <div class="concept-highlight">
+            <strong>相談先を何度も変えなくていい。</strong>
+            結婚前から結婚後まで、あなたとご家族のことを理解した同じ担当者に相談できます。
           </div>
         </div>
       </div>
     </section>
 
-    <section id="support" class="section section-soft">
+    <section id="support" class="section section-white">
       <div class="container">
         <div class="section-heading">
           <small>WHOLE LIFE SUPPORT</small>
           <h2>人生をまるごと支える<br>5つのサポート</h2>
         </div>
 
-        <div class="service-grid">
-          <article class="service-card">
-            <div class="service-icon">♥</div>
+        <div class="support-grid">
+          <article class="support-card">
+            <div class="support-icon">♥</div>
             <h3>婚活</h3>
             <p>
-              お相手探し、紹介、お見合い、交際から成婚まで伴走します。
+              お相手探し、お見合い、交際、成婚まで丁寧に伴走します。
             </p>
           </article>
 
-          <article class="service-card">
-            <div class="service-icon">⌂</div>
+          <article class="support-card">
+            <div class="support-icon">⌂</div>
             <h3>住まい</h3>
             <p>
-              賃貸、購入、住み替えなど、新生活の住まいを一緒に考えます。
+              賃貸、購入、住み替えなど、結婚後の住まいを一緒に考えます。
             </p>
           </article>
 
-          <article class="service-card">
-            <div class="service-icon">¥</div>
+          <article class="support-card">
+            <div class="support-icon">¥</div>
             <h3>家計・FP</h3>
             <p>
-              結婚後の生活費、貯蓄、住宅購入などの資金計画を整理します。
+              生活費、貯蓄、住宅購入など、将来の資金計画を整理します。
             </p>
           </article>
 
-          <article class="service-card">
-            <div class="service-icon">☂</div>
+          <article class="support-card">
+            <div class="support-icon">☂</div>
             <h3>保険</h3>
             <p>
-              家族構成や暮らしに合わせ、必要な備えを考えるお手伝いをします。
+              家族構成や生活に合わせて、必要な備えを一緒に考えます。
             </p>
           </article>
 
-          <article class="service-card">
-            <div class="service-icon">☺</div>
+          <article class="support-card">
+            <div class="support-icon">☺</div>
             <h3>再婚・子育て</h3>
             <p>
-              子連れ婚、再婚、家族関係の不安にも、実体験をもとに寄り添います。
+              再婚や子連れ婚、家族関係の不安にも実体験から寄り添います。
             </p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="representative" class="section section-white">
-      <div class="container profile">
+    <section id="representative" class="section section-cream">
+      <div class="container profile-grid">
         <div class="profile-card">
           <div class="profile-photo">☺</div>
           <h3>代表者名</h3>
@@ -956,23 +1164,24 @@
 
           <h2>
             資格だけではなく、<br>
-            家族をつくった経験があります。
+            家族をつくり、育てた経験があります。
           </h2>
 
           <p>
             代表は不動産業に携わりながら、
             FP2級や保険に関する資格を取得し、
-            多くの方の住まいや人生設計に向き合ってきました。
+            住まいや人生設計に向き合ってきました。
           </p>
 
           <p>
-            さらに、自身もお子さまのいる女性と結婚し、
+            また、自身もお子さまのいる女性と結婚し、
             家族として子どもを育て上げた経験があります。
           </p>
 
           <p>
-            理論だけでは分からない、再婚への不安、
-            子どもとの関係、家族になるまでの葛藤も理解しています。
+            再婚への不安、子どもとの距離、
+            家族として関係を築く難しさを、
+            理論だけではなく実生活を知る立場から受け止めます。
           </p>
 
           <div class="qualification-list">
@@ -992,10 +1201,10 @@
             </div>
           </div>
 
-          <div class="family-box">
+          <div class="experience-box">
             <strong>子持ちの女性との結婚・子育て経験</strong>
             再婚や子連れ婚について、表面的なアドバイスではなく、
-            実際の生活を知る立場からお話を伺います。
+            家族になる過程を知る立場からお話を伺います。
           </div>
         </div>
       </div>
@@ -1012,26 +1221,26 @@
           <article class="flow-card">
             <h3>無料相談</h3>
             <p>
-              今のお悩みや結婚への希望を、ゆっくりお聞きします。
+              今のお悩みや結婚に対する希望を、ゆっくりお聞きします。
             </p>
           </article>
 
           <article class="flow-card">
-            <h3>人生設計の整理</h3>
+            <h3>人生設計を整理</h3>
             <p>
-              結婚観、仕事、住まい、お金、家族像を一緒に整理します。
+              結婚観、仕事、家族、住まい、お金について一緒に整理します。
             </p>
           </article>
 
           <article class="flow-card">
             <h3>婚活サポート</h3>
             <p>
-              お相手探し、お見合い、交際中の相談まで伴走します。
+              お相手探し、お見合い、交際中の相談まで継続して伴走します。
             </p>
           </article>
 
           <article class="flow-card">
-            <h3>成婚後のサポート</h3>
+            <h3>成婚後の相談</h3>
             <p>
               新居、家計、保険、家族についても引き続き相談できます。
             </p>
@@ -1047,13 +1256,13 @@
             <small>MATCHING PARTY</small>
 
             <h2>
-              まずは気軽に、<br>
-              婚活パーティーから。
+              いきなり相談所は不安。<br>
+              そんな方はパーティーから。
             </h2>
 
             <p>
               一人参加、初参加も歓迎。
-              自然に会話できる少人数制のイベントです。
+              自然な会話を楽しめる婚活パーティーを開催しています。
             </p>
 
             <a class="button party-button" href="party.html">
@@ -1069,6 +1278,45 @@
       </div>
     </section>
 
+    <section id="faq" class="section section-soft">
+      <div class="container">
+        <div class="section-heading">
+          <small>FAQ</small>
+          <h2>よくあるご質問</h2>
+        </div>
+
+        <div class="faq-list">
+          <details>
+            <summary>まだ結婚するか迷っていますが、相談できますか？</summary>
+            <div class="faq-answer">
+              はい。入会を前提とせず、今のお悩みや将来について整理するところからご相談いただけます。
+            </div>
+          </details>
+
+          <details>
+            <summary>再婚や子連れでの婚活も相談できますか？</summary>
+            <div class="faq-answer">
+              はい。代表自身に子持ちの女性との結婚・子育て経験があるため、再婚や子連れ婚の不安にも丁寧に寄り添います。
+            </div>
+          </details>
+
+          <details>
+            <summary>住宅や保険の契約を勧められませんか？</summary>
+            <div class="faq-answer">
+              無理な契約や勧誘を前提とした相談ではありません。まずはご本人の希望や生活設計を整理することを大切にします。
+            </div>
+          </details>
+
+          <details>
+            <summary>婚活パーティーだけの参加もできますか？</summary>
+            <div class="faq-answer">
+              はい。相談所への入会を決めていない方でも、婚活パーティーのみご参加いただけます。
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section id="contact" class="cta-section">
       <div class="container">
         <div class="cta-box">
@@ -1080,8 +1328,8 @@
           </h2>
 
           <p>
-            まだ結婚するか迷っている方でも大丈夫です。
-            今の不安やこれから叶えたい暮らしについて、
+            まだ何から始めればよいか分からなくても大丈夫です。
+            今抱えている不安や、これから叶えたい暮らしについて、
             まずは気軽にお話しください。
           </p>
 
@@ -1092,8 +1340,8 @@
             無料相談を申し込む
           </a>
 
-          <div class="note">
-            ※メールアドレス、代表者名、保有資格の正式名称は公開前に変更してください。
+          <div class="cta-note">
+            ※代表者名・相談所名・メールアドレス・資格名称は公開前に正式情報へ変更してください。
           </div>
         </div>
       </div>
