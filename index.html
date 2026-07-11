@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
   <title>婚活パーティー参加申込み</title>
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
@@ -238,10 +239,117 @@
       .two-columns {
         grid-template-columns: 1fr;
       }
+=======
+  <title>婚活パーティー｜素敵な出会いから結婚相談へ</title>
+  <meta name="description" content="気軽に参加できる婚活パーティー。自然な出会いから、希望する方には結婚相談所の無料相談もご案内します。">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+      color: #3d3035;
+      background: #fffaf7;
+      line-height: 1.7;
     }
+    .hero {
+      min-height: 82vh;
+      display: grid;
+      place-items: center;
+      padding: 48px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #fff1ec, #fffaf7 55%, #f7ebe8);
+    }
+    .hero-inner { max-width: 760px; }
+    .label {
+      display: inline-block;
+      padding: 7px 18px;
+      border-radius: 999px;
+      background: #fff;
+      color: #b85f67;
+      font-weight: 700;
+      box-shadow: 0 6px 20px rgba(120,70,70,.1);
+    }
+    h1 {
+      margin: 24px 0 16px;
+      font-size: clamp(34px, 7vw, 64px);
+      line-height: 1.2;
+    }
+    h1 span { color: #c55d67; }
+    .lead {
+      margin: 0 auto 28px;
+      max-width: 600px;
+      font-size: 18px;
+    }
+    .button {
+      display: inline-block;
+      padding: 15px 34px;
+      border-radius: 999px;
+      background: #c55d67;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(197,93,103,.25);
+    }
+    section {
+      max-width: 900px;
+      margin: auto;
+      padding: 70px 24px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 30px;
+      margin-bottom: 34px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: #fff;
+      padding: 26px;
+      border-radius: 18px;
+      box-shadow: 0 8px 28px rgba(80,50,50,.08);
+    }
+    .flow {
+      background: #f9eeee;
+      border-radius: 24px;
+      text-align: center;
+    }
+    footer {
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #837278;
+>>>>>>> origin/main
+    }
+  
+    .hero-image-wrap {
+      margin-bottom: 26px;
+      overflow: hidden;
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 16px 42px rgba(120, 67, 91, 0.16);
+    }
+
+    .hero-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    @media (max-width: 600px) {
+      .hero-image-wrap {
+        margin: -4px -2px 22px;
+        border-radius: 16px;
+      }
+    }
+
   </style>
 </head>
 <body>
+<<<<<<< HEAD
   <main class="page">
     <header class="header">
       <div class="label">SPECIAL MATCHING EVENT</div>
@@ -254,6 +362,15 @@
 
     <section class="card">
       <div id="formArea">
+
+        <div class="hero-image-wrap">
+          <img
+            class="hero-image"
+            src="assets/konkatsu-hero.png"
+            alt="婚活パーティー 素敵な出会いをここから"
+          >
+        </div>
+
         <div class="event-info">
           <div><strong>開催日</strong><span>2026年8月8日（土）</span></div>
           <div><strong>時間</strong><span>14:00〜16:00</span></div>
@@ -394,5 +511,45 @@
       });
     });
   </script>
+=======
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="label">自然な出会いからはじめる婚活</div>
+      <h1>まずは楽しく、<br><span>会ってみませんか？</span></h1>
+      <p class="lead">
+        かしこまったお見合いではなく、会話を楽しむ婚活パーティーです。
+        素敵な出会いを探したい方も、婚活について相談してみたい方も、
+        気軽にご参加ください。
+      </p>
+      <a class="button" href="#entry">パーティーに申し込む</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>こんな方におすすめ</h2>
+    <div class="cards">
+      <div class="card">婚活を始めたいけれど、何から始めればよいか分からない</div>
+      <div class="card">結婚相談所に入る前に、まずは気軽な出会いを体験したい</div>
+      <div class="card">安心できる場所で、真剣に結婚を考える人と出会いたい</div>
+    </div>
+  </section>
+
+  <section class="flow">
+    <h2>出会いから結婚までをサポート</h2>
+    <p>
+      婚活パーティーへの参加後、希望される方には無料の婚活相談をご案内します。
+      無理な勧誘は行わず、一人ひとりに合った婚活方法を一緒に考えます。
+    </p>
+  </section>
+
+  <section id="entry">
+    <h2>参加のお申し込み</h2>
+    <p style="text-align:center;">開催日時・会場・参加費・申込フォームは、こちらに掲載予定です。</p>
+  </section>
+
+  <footer>
+    © 婚活パーティー運営事務局
+  </footer>
+>>>>>>> origin/main
 </body>
 </html>
