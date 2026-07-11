@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>婚活パーティー参加申込み</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+        "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      color: #2f2930;
+      background:
+        radial-gradient(circle at top left, #ffe7ef 0, transparent 35%),
+        radial-gradient(circle at bottom right, #eadfff 0, transparent 35%),
+        #fff9fb;
+    }
+
+    .page {
+      width: min(100% - 32px, 720px);
+      margin: 0 auto;
+      padding: 48px 0 80px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .label {
+      display: inline-block;
+      padding: 6px 14px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      background: #fff;
+      color: #a74f73;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 8px 30px rgba(120, 67, 91, 0.1);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 6vw, 42px);
+      line-height: 1.25;
+    }
+
+    .lead {
+      margin: 0;
+      color: #766c72;
+      line-height: 1.8;
+    }
+
+    .card {
+      padding: 32px;
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 28px;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 24px 70px rgba(110, 72, 90, 0.14);
+      backdrop-filter: blur(14px);
+    }
+
+    .event-info {
+      display: grid;
+      gap: 10px;
+      padding: 18px;
+      margin-bottom: 26px;
+      border-radius: 18px;
+      background: #fff5f8;
+    }
+
+    .event-info div {
+      display: flex;
+      gap: 14px;
+      line-height: 1.6;
+    }
+
+    .event-info strong {
+      min-width: 70px;
+      color: #a74f73;
+    }
+
+    form {
+      display: grid;
+      gap: 20px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .required {
+      margin-left: 6px;
+      color: #d94470;
+      font-size: 12px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 14px 15px;
+      border: 1px solid #e4dce0;
+      border-radius: 14px;
+      background: #fff;
+      font: inherit;
+      color: inherit;
+      outline: none;
+      transition: .2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #ca6c91;
+      box-shadow: 0 0 0 4px rgba(202,108,145,.13);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .two-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #62585e;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .check input {
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      flex: 0 0 auto;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      border: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #dc6d99, #9a65d4);
+      color: white;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(174, 83, 135, .25);
+      transition: .2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(174, 83, 135, .32);
+    }
+
+    .complete {
+      display: none;
+      text-align: center;
+    }
+
+    .complete h2 {
+      font-size: 28px;
+      margin: 0 0 10px;
+    }
+
+    .complete p {
+      color: #746a70;
+      line-height: 1.8;
+    }
+
+    .number-box {
+      margin: 22px 0;
+      padding: 18px;
+      border-radius: 16px;
+      background: #fff5f8;
+    }
+
+    .number-box small {
+      display: block;
+      margin-bottom: 5px;
+      color: #8a7c84;
+    }
+
+    .number-box strong {
+      font-size: 24px;
+      letter-spacing: 1px;
+      color: #a74f73;
+    }
+
+    #qrcode {
+      width: fit-content;
+      margin: 22px auto;
+      padding: 18px;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 10px 35px rgba(82, 50, 65, .12);
+    }
+
+    .notice {
+      padding: 14px;
+      border-radius: 14px;
+      background: #f7f4f8;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        width: min(100% - 20px, 720px);
+        padding-top: 26px;
+      }
+
+      .card {
+        padding: 22px 18px;
+        border-radius: 22px;
+      }
+
+      .two-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <div class="label">SPECIAL MATCHING EVENT</div>
+      <h1>婚活パーティー<br>参加申込み</h1>
+      <p class="lead">
+        お申し込み後、当日の受付に使用する<br>
+        QRコードを発行します。
+      </p>
+    </header>
+
+    <section class="card">
+      <div id="formArea">
+        <div class="event-info">
+          <div><strong>開催日</strong><span>2026年8月8日（土）</span></div>
+          <div><strong>時間</strong><span>14:00〜16:00</span></div>
+          <div><strong>会場</strong><span>大阪市内</span></div>
+          <div><strong>参加費</strong><span>男性 5,000円 ／ 女性 3,000円</span></div>
+        </div>
+
+        <form id="entryForm">
+          <div class="field">
+            <label for="name">お名前<span class="required">必須</span></label>
+            <input id="name" name="name" type="text" placeholder="例：大阪 はなこ" required>
+          </div>
+
+          <div class="field">
+            <label for="kana">ふりがな<span class="required">必須</span></label>
+            <input id="kana" name="kana" type="text" placeholder="例：おおさか はなこ" required>
+          </div>
+
+          <div class="two-columns">
+            <div class="field">
+              <label for="gender">参加区分<span class="required">必須</span></label>
+              <select id="gender" name="gender" required>
+                <option value="">選択してください</option>
+                <option value="男性">男性</option>
+                <option value="女性">女性</option>
+                <option value="その他">その他・回答しない</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="age">年齢<span class="required">必須</span></label>
+              <input id="age" name="age" type="number" min="18" max="99" placeholder="例：35" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">メールアドレス<span class="required">必須</span></label>
+            <input id="email" name="email" type="email" placeholder="example@email.com" required>
+          </div>
+
+          <div class="field">
+            <label for="phone">電話番号<span class="required">必須</span></label>
+            <input id="phone" name="phone" type="tel" placeholder="09012345678" required>
+          </div>
+
+          <div class="field">
+            <label for="area">お住まいの地域</label>
+            <input id="area" name="area" type="text" placeholder="例：大阪市">
+          </div>
+
+          <div class="field">
+            <label for="job">職業</label>
+            <input id="job" name="job" type="text" placeholder="例：会社員、自営業">
+          </div>
+
+          <div class="field">
+            <label for="message">趣味・ひとこと</label>
+            <textarea id="message" name="message" placeholder="休日の過ごし方や趣味などをご記入ください"></textarea>
+          </div>
+
+          <label class="check">
+            <input type="checkbox" required>
+            <span>
+              参加規約および個人情報の取扱いに同意します。
+              迷惑行為や営業・勧誘目的での参加はできません。
+            </span>
+          </label>
+
+          <button type="submit">参加を申し込む</button>
+        </form>
+      </div>
+
+      <div id="completeArea" class="complete">
+        <div style="font-size:54px;">✓</div>
+        <h2>お申し込み完了</h2>
+        <p>
+          当日は下のQRコードを受付スタッフに<br>
+          ご提示ください。
+        </p>
+
+        <div class="number-box">
+          <small>受付番号</small>
+          <strong id="entryNumber"></strong>
+        </div>
+
+        <div id="qrcode"></div>
+
+        <p id="applicantName"></p>
+
+        <div class="notice">
+          この画面をスクリーンショットして保存してください。
+        </div>
+
+        <button type="button" onclick="location.reload()" style="margin-top:22px;">
+          別の申込みを入力する
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("entryForm");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const gender = document.getElementById("gender").value;
+      const timestamp = Date.now();
+      const random = Math.floor(1000 + Math.random() * 9000);
+      const entryNumber = "MP-" + timestamp.toString().slice(-6) + "-" + random;
+
+      const qrData = JSON.stringify({
+        event: "婚活パーティー",
+        entryNumber: entryNumber,
+        name: name,
+        gender: gender,
+        checkedIn: false
+      });
+
+      document.getElementById("formArea").style.display = "none";
+      document.getElementById("completeArea").style.display = "block";
+      document.getElementById("entryNumber").textContent = entryNumber;
+      document.getElementById("applicantName").textContent = name + " 様";
+
+      document.getElementById("qrcode").innerHTML = "";
+
+      new QRCode(document.getElementById("qrcode"), {
+        text: qrData,
+        width: 210,
+        height: 210,
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  </script>
+</body>
+</html>
