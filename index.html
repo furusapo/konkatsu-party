@@ -3,22 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="大阪開催の婚活パーティー参加申込みフォームです。申込み完了後に受付用QRコードを発行します。">
-  <title>婚活パーティー参加申込み｜大阪</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <title>人生をまるごと相談できる結婚相談所｜大阪</title>
+
+  <meta
+    name="description"
+    content="結婚相手探しだけでなく、住まい・保険・家計・子育てまで。FP2級、不動産・保険の知識と実体験をもつ代表が、人生設計をまるごとサポートする大阪の結婚相談所です。"
+  >
 
   <style>
     :root {
-      --pink: #ef6580;
+      --pink: #ef6f89;
       --pink-dark: #d94f6c;
-      --pink-light: #fff0f3;
-      --gold: #d9ad4c;
-      --brown: #49352e;
-      --text: #43363a;
-      --muted: #81757a;
-      --border: #f0d9df;
+      --pink-soft: #fff0f3;
+      --cream: #fffaf5;
+      --gold: #cfa64d;
+      --brown: #49362f;
+      --text: #4b3d41;
+      --muted: #83757a;
       --white: #ffffff;
+      --border: #f0dce1;
+      --green: #608d7a;
     }
 
     * {
@@ -31,7 +36,6 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
       color: var(--text);
       font-family:
         "Hiragino Maru Gothic ProN",
@@ -40,654 +44,1064 @@
         "Yu Gothic",
         "Meiryo",
         sans-serif;
-      background:
-        radial-gradient(circle at 10% 0%, #ffe9ef 0, transparent 32%),
-        radial-gradient(circle at 100% 100%, #fff0d9 0, transparent 30%),
-        #fffaf9;
+      line-height: 1.8;
+      background: var(--cream);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
     }
 
     button,
     input,
-    select,
-    textarea {
+    textarea,
+    select {
       font: inherit;
     }
 
-    .page {
-      width: min(1500px, calc(100% - 32px));
-      margin: 24px auto;
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
     }
 
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(480px, .92fr);
-      align-items: start;
-      overflow: hidden;
-      border: 1px solid rgba(239, 101, 128, .22);
-      border-radius: 28px;
-      background: var(--white);
-      box-shadow: 0 28px 90px rgba(97, 54, 66, .16);
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(239, 111, 137, .14);
+      background: rgba(255, 255, 255, .94);
+      backdrop-filter: blur(18px);
     }
 
-    .visual {
-      position: relative;
-      align-self: start;
-      overflow: hidden;
-      background: #f9e7e8;
+    .header-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
     }
 
-    .visual img {
+    .logo {
+      text-decoration: none;
+    }
+
+    .logo-main {
       display: block;
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      object-position: top center;
+      color: var(--brown);
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: .04em;
     }
 
-    .form-side {
-      padding: 42px;
+    .logo-sub {
+      display: block;
+      color: var(--pink-dark);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav a {
+      color: #615258;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .nav .header-cta {
+      padding: 11px 18px;
+      border-radius: 999px;
+      color: var(--white);
+      background: linear-gradient(135deg, #f17b92, #e55371);
+      box-shadow: 0 10px 24px rgba(217, 79, 108, .2);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 88px 0 80px;
       background:
-        linear-gradient(rgba(255, 255, 255, .95), rgba(255, 255, 255, .97)),
-        radial-gradient(circle at top right, #ffe8ee, transparent 35%);
+        radial-gradient(circle at 10% 0%, #ffe4eb 0, transparent 32%),
+        radial-gradient(circle at 100% 80%, #fff0cf 0, transparent 30%),
+        #fffaf8;
     }
 
-    .form-header {
-      margin-bottom: 28px;
-      text-align: center;
+    .hero::before {
+      position: absolute;
+      top: 80px;
+      right: -130px;
+      width: 380px;
+      height: 380px;
+      border: 1px solid rgba(207, 166, 77, .24);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      align-items: center;
+      gap: 60px;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      margin-bottom: 12px;
+      gap: 8px;
+      margin-bottom: 20px;
       padding: 7px 15px;
       border-radius: 999px;
       color: var(--pink-dark);
-      background: var(--pink-light);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: .08em;
-    }
-
-    h1 {
-      margin: 0 0 10px;
-      color: var(--brown);
-      font-size: clamp(28px, 4vw, 38px);
-      line-height: 1.35;
-    }
-
-    .form-header p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .event-info {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 28px;
-    }
-
-    .event-item {
-      padding: 14px 15px;
-      border: 1px solid #f1dfe3;
-      border-radius: 14px;
-      background: #fff9fa;
-    }
-
-    .event-item small {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--pink-dark);
+      background: var(--pink-soft);
       font-size: 12px;
-      font-weight: 800;
-    }
-
-    .event-item strong {
-      color: var(--brown);
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    form {
-      display: grid;
-      gap: 19px;
-    }
-
-    .columns {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .field {
-      display: grid;
-      gap: 8px;
-    }
-
-    .field label {
-      color: var(--brown);
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .required {
-      display: inline-block;
-      margin-left: 7px;
-      padding: 2px 7px;
-      border-radius: 999px;
-      color: var(--pink-dark);
-      background: var(--pink-light);
-      font-size: 11px;
-      font-weight: 800;
-    }
-
-    input,
-    select,
-    textarea {
-      width: 100%;
-      border: 1px solid #ddd4d7;
-      border-radius: 12px;
-      color: var(--text);
-      background: var(--white);
-      outline: none;
-      transition: border-color .2s, box-shadow .2s, transform .2s;
-    }
-
-    input,
-    select {
-      height: 52px;
-      padding: 0 14px;
-    }
-
-    textarea {
-      min-height: 108px;
-      padding: 14px;
-      resize: vertical;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: var(--pink);
-      box-shadow: 0 0 0 4px rgba(239, 101, 128, .12);
-    }
-
-    .agreement {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 15px;
-      border: 1px solid #eee1e4;
-      border-radius: 12px;
-      background: #fffafa;
-      color: #62555a;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .agreement input {
-      width: 19px;
-      height: 19px;
-      margin: 2px 0 0;
-      flex: 0 0 auto;
-      accent-color: var(--pink);
-    }
-
-    .submit-button,
-    .reset-button {
-      width: 100%;
-      min-height: 56px;
-      border: 0;
-      border-radius: 14px;
-      color: var(--white);
-      background: linear-gradient(135deg, #f1718a, #e64f70);
-      font-size: 17px;
       font-weight: 900;
-      letter-spacing: .04em;
-      cursor: pointer;
-      box-shadow: 0 14px 30px rgba(224, 77, 107, .25);
+      letter-spacing: .12em;
+    }
+
+    .hero h1 {
+      margin: 0 0 24px;
+      color: var(--brown);
+      font-size: clamp(40px, 6vw, 68px);
+      line-height: 1.25;
+      letter-spacing: .03em;
+    }
+
+    .hero h1 span {
+      color: var(--pink-dark);
+    }
+
+    .hero-lead {
+      max-width: 650px;
+      margin: 0 0 30px;
+      color: #6d5c62;
+      font-size: 18px;
+      line-height: 2;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 56px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 28px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 900;
       transition: transform .2s, box-shadow .2s;
     }
 
-    .submit-button:hover,
-    .reset-button:hover {
+    .button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 18px 36px rgba(224, 77, 107, .32);
     }
 
-    .privacy {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      margin: 16px 0 0;
-      color: #8a7d81;
-      font-size: 12px;
-      text-align: center;
+    .button-primary {
+      color: var(--white);
+      background: linear-gradient(135deg, #f17b92, #e55371);
+      box-shadow: 0 14px 30px rgba(217, 79, 108, .22);
     }
 
-    .complete {
-      display: none;
-      min-height: 650px;
-      align-content: center;
-      text-align: center;
+    .button-secondary {
+      border: 1px solid var(--border);
+      color: var(--brown);
+      background: var(--white);
     }
 
-    .complete-icon {
+    .hero-card {
+      position: relative;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, .8);
+      border-radius: 32px;
+      background: rgba(255, 255, 255, .72);
+      box-shadow: 0 28px 70px rgba(101, 65, 76, .16);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card img {
+      width: 100%;
+      border-radius: 22px;
+    }
+
+    .hero-badge {
+      position: absolute;
+      right: -18px;
+      bottom: 34px;
+      width: 148px;
+      height: 148px;
       display: grid;
-      width: 74px;
-      height: 74px;
-      margin: 0 auto 20px;
       place-items: center;
+      border: 5px solid rgba(255, 255, 255, .8);
       border-radius: 50%;
       color: var(--white);
-      background: linear-gradient(135deg, #f1718a, #e64f70);
-      font-size: 36px;
+      background: var(--pink);
+      text-align: center;
+      font-size: 14px;
       font-weight: 900;
-      box-shadow: 0 14px 35px rgba(224, 77, 107, .24);
+      line-height: 1.55;
+      box-shadow: 0 18px 40px rgba(217, 79, 108, .25);
     }
 
-    .complete h2 {
-      margin: 0 0 10px;
+    .hero-badge strong {
+      display: block;
+      font-size: 24px;
+    }
+
+    .trust-strip {
+      border-top: 1px solid #f2e2e5;
+      border-bottom: 1px solid #f2e2e5;
+      background: var(--white);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .trust-item {
+      padding: 28px 16px;
+      text-align: center;
+    }
+
+    .trust-item + .trust-item {
+      border-left: 1px solid #f0e5e7;
+    }
+
+    .trust-item strong {
+      display: block;
       color: var(--brown);
-      font-size: 30px;
+      font-size: 17px;
     }
 
-    .complete-text {
+    .trust-item span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .section {
+      padding: 96px 0;
+    }
+
+    .section-white {
+      background: var(--white);
+    }
+
+    .section-soft {
+      background:
+        radial-gradient(circle at top left, #ffeef2 0, transparent 26%),
+        #fffaf9;
+    }
+
+    .section-heading {
+      max-width: 780px;
+      margin: 0 auto 52px;
+      text-align: center;
+    }
+
+    .section-heading small {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--pink-dark);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .16em;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 16px;
+      color: var(--brown);
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.45;
+    }
+
+    .section-heading p {
       margin: 0;
       color: var(--muted);
-      line-height: 1.8;
     }
 
-    .entry-box {
-      margin: 24px 0;
-      padding: 18px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: var(--pink-light);
+    .concept-box {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      align-items: center;
+      gap: 56px;
     }
 
-    .entry-box small {
+    .concept-visual {
+      position: relative;
+      min-height: 480px;
+      overflow: hidden;
+      border-radius: 30px;
+      background:
+        linear-gradient(rgba(70, 43, 47, .12), rgba(70, 43, 47, .3)),
+        url("assets/konkatsu-hero.png") center / cover;
+      box-shadow: 0 24px 60px rgba(85, 57, 65, .14);
+    }
+
+    .concept-message {
+      position: absolute;
+      right: 22px;
+      bottom: 22px;
+      left: 22px;
+      padding: 22px;
+      border-radius: 20px;
+      color: var(--white);
+      background: rgba(74, 48, 54, .72);
+      backdrop-filter: blur(8px);
+    }
+
+    .concept-message strong {
       display: block;
       margin-bottom: 5px;
-      color: var(--muted);
+      font-size: 22px;
     }
 
-    .entry-box strong {
+    .concept-copy h3 {
+      margin: 0 0 22px;
+      color: var(--brown);
+      font-size: 32px;
+      line-height: 1.55;
+    }
+
+    .concept-copy p {
+      margin: 0 0 18px;
+      color: #74666a;
+    }
+
+    .highlight {
       color: var(--pink-dark);
-      font-size: 24px;
-      letter-spacing: .08em;
+      font-weight: 900;
     }
 
-    #qrcode {
-      width: fit-content;
-      margin: 22px auto;
-      padding: 17px;
-      border: 1px solid #eee;
-      border-radius: 16px;
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    .service-card {
+      padding: 28px 20px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
       background: var(--white);
-      box-shadow: 0 12px 32px rgba(70, 42, 49, .12);
+      text-align: center;
+      box-shadow: 0 12px 32px rgba(91, 60, 70, .07);
     }
 
-    #qrcode img,
-    #qrcode canvas {
-      display: block;
-      max-width: 100%;
-      height: auto;
+    .service-icon {
+      width: 64px;
+      height: 64px;
+      display: grid;
+      margin: 0 auto 17px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--pink-soft);
+      font-size: 27px;
     }
 
-    .applicant {
-      margin: 15px 0;
+    .service-card h3 {
+      margin: 0 0 10px;
       color: var(--brown);
       font-size: 18px;
-      font-weight: 800;
     }
 
-    .screenshot-note {
-      margin: 20px 0;
-      padding: 13px;
-      border-radius: 12px;
-      color: #75666b;
-      background: #f7f3f4;
+    .service-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .profile {
+      display: grid;
+      grid-template-columns: .78fr 1.22fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .profile-card {
+      padding: 38px;
+      border-radius: 28px;
+      color: var(--white);
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,.18), transparent 35%),
+        linear-gradient(145deg, #5a4640, #342927);
+      box-shadow: 0 24px 60px rgba(58, 42, 43, .2);
+    }
+
+    .profile-photo {
+      width: 150px;
+      height: 150px;
+      display: grid;
+      margin: 0 auto 22px;
+      place-items: center;
+      border: 3px solid rgba(255,255,255,.55);
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      font-size: 56px;
+    }
+
+    .profile-card h3 {
+      margin: 0;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    .profile-card p {
+      margin: 8px 0 0;
+      color: rgba(255,255,255,.74);
+      text-align: center;
       font-size: 13px;
     }
 
-    .reset-button {
-      max-width: 360px;
+    .profile-copy h2 {
+      margin: 0 0 22px;
+      color: var(--brown);
+      font-size: clamp(30px, 4vw, 42px);
+      line-height: 1.5;
+    }
+
+    .profile-copy p {
+      margin: 0 0 18px;
+      color: #74656a;
+    }
+
+    .qualification-list {
+      display: grid;
+      gap: 11px;
+      margin-top: 26px;
+    }
+
+    .qualification-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: #fff6f8;
+      font-weight: 800;
+    }
+
+    .qualification-item span:first-child {
+      color: var(--pink-dark);
+    }
+
+    .family-box {
+      margin-top: 22px;
+      padding: 20px;
+      border-left: 4px solid var(--gold);
+      border-radius: 0 16px 16px 0;
+      background: #fffaf0;
+    }
+
+    .family-box strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--brown);
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      counter-reset: flow;
+    }
+
+    .flow-card {
+      position: relative;
+      padding: 28px 22px;
+      border-radius: 20px;
+      background: var(--white);
+      box-shadow: 0 12px 32px rgba(91, 60, 70, .07);
+      counter-increment: flow;
+    }
+
+    .flow-card::before {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 16px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--white);
+      background: var(--pink);
+      content: counter(flow);
+      font-weight: 900;
+    }
+
+    .flow-card h3 {
+      margin: 0 0 8px;
+      color: var(--brown);
+      font-size: 18px;
+    }
+
+    .flow-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .party-panel {
+      display: grid;
+      grid-template-columns: 1fr .9fr;
+      overflow: hidden;
+      border-radius: 30px;
+      color: var(--white);
+      background: linear-gradient(135deg, #ed7089, #d94f6c);
+      box-shadow: 0 24px 60px rgba(217, 79, 108, .2);
+    }
+
+    .party-copy {
+      padding: 52px;
+    }
+
+    .party-copy small {
+      font-weight: 900;
+      letter-spacing: .15em;
+    }
+
+    .party-copy h2 {
+      margin: 10px 0 18px;
+      font-size: 36px;
+      line-height: 1.45;
+    }
+
+    .party-copy p {
+      margin: 0 0 25px;
+      color: rgba(255,255,255,.85);
+    }
+
+    .party-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .party-button {
+      color: var(--pink-dark);
+      background: var(--white);
+    }
+
+    .cta-section {
+      padding: 90px 0;
+      text-align: center;
+      background:
+        radial-gradient(circle at 20% 0%, #ffe4eb, transparent 30%),
+        radial-gradient(circle at 90% 100%, #fff0d0, transparent 30%),
+        var(--white);
+    }
+
+    .cta-box {
+      max-width: 850px;
       margin: 0 auto;
-      background: linear-gradient(135deg, #9b858b, #77666b);
-      box-shadow: none;
+      padding: 60px 32px;
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      background: rgba(255,255,255,.82);
+      box-shadow: 0 24px 70px rgba(90, 58, 68, .1);
     }
 
-    @media (max-width: 1050px) {
-      .page {
-        width: min(100% - 20px, 800px);
-        margin: 10px auto 30px;
-      }
-
-      .layout {
-        grid-template-columns: 1fr;
-        border-radius: 20px;
-      }
-
-      .visual {
-        width: 100%;
-        min-height: 0;
-      }
-
-      .visual img {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-        object-position: top center;
-      }
+    .cta-box h2 {
+      margin: 0 0 16px;
+      color: var(--brown);
+      font-size: clamp(30px, 5vw, 46px);
+      line-height: 1.5;
     }
 
-    @media (max-width: 620px) {
-      .page {
-        width: 100%;
-        margin: 0;
-      }
+    .cta-box p {
+      margin: 0 auto 28px;
+      max-width: 600px;
+      color: var(--muted);
+    }
 
-      .layout {
-        border: 0;
-        border-radius: 0;
-        box-shadow: none;
-      }
+    .note {
+      margin-top: 17px;
+      color: #94878b;
+      font-size: 11px;
+    }
 
-      .form-side {
-        padding: 28px 18px 50px;
-      }
+    footer {
+      padding: 38px 20px;
+      color: #897b80;
+      background: #392d2b;
+      text-align: center;
+      font-size: 12px;
+    }
 
-      .columns,
-      .event-info {
+    @media (max-width: 1000px) {
+      .hero-grid,
+      .concept-box,
+      .profile,
+      .party-panel {
         grid-template-columns: 1fr;
       }
 
-      h1 {
-        font-size: 27px;
+      .hero-card {
+        max-width: 680px;
+        margin: 0 auto;
       }
 
-      .complete {
-        min-height: 560px;
+      .service-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .flow-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .party-panel img {
+        max-height: 460px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav a:not(.header-cta) {
+        display: none;
+      }
+
+      .header-cta {
+        padding: 9px 14px !important;
+        font-size: 12px !important;
+      }
+
+      .hero {
+        padding: 55px 0 60px;
+      }
+
+      .hero-grid {
+        gap: 36px;
+      }
+
+      .hero h1 {
+        font-size: 39px;
+      }
+
+      .hero-lead {
+        font-size: 16px;
+      }
+
+      .hero-buttons {
+        display: grid;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-badge {
+        right: 8px;
+        bottom: 16px;
+        width: 116px;
+        height: 116px;
+        font-size: 11px;
+      }
+
+      .hero-badge strong {
+        font-size: 19px;
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .trust-item:nth-child(3) {
+        border-left: 0;
+        border-top: 1px solid #f0e5e7;
+      }
+
+      .trust-item:nth-child(4) {
+        border-top: 1px solid #f0e5e7;
+      }
+
+      .section {
+        padding: 70px 0;
+      }
+
+      .service-grid,
+      .flow-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .concept-visual {
+        min-height: 390px;
+      }
+
+      .profile-card {
+        padding: 30px 20px;
+      }
+
+      .party-copy {
+        padding: 36px 24px;
+      }
+
+      .party-copy h2 {
+        font-size: 29px;
+      }
+
+      .cta-box {
+        padding: 45px 20px;
       }
     }
   </style>
 </head>
 
 <body>
-  <main class="page">
-    <section class="layout">
-      <div class="visual">
-        <img
-          src="assets/konkatsu-hero.png"
-          alt="大阪で開催する婚活パーティーのご案内"
-        >
-      </div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#">
+        <span class="logo-main">人生まるごと結婚相談所</span>
+        <span class="logo-sub">MARRIAGE & LIFE DESIGN</span>
+      </a>
 
-      <div class="form-side">
-        <div id="formArea">
-          <header class="form-header">
-            <div class="eyebrow">♥ OSAKA MATCHING EVENT</div>
-            <h1>参加申込みフォーム</h1>
-            <p>
-              必要事項をご入力のうえ、お申し込みください。<br>
-              完了後に当日の受付用QRコードを発行します。
-            </p>
-          </header>
+      <nav class="nav">
+        <a href="#concept">私たちについて</a>
+        <a href="#support">サポート</a>
+        <a href="#representative">代表紹介</a>
+        <a class="header-cta" href="#contact">無料相談</a>
+      </nav>
+    </div>
+  </header>
 
-          <div class="event-info">
-            <div class="event-item">
-              <small>開催日</small>
-              <strong>2026年8月8日（土）</strong>
-            </div>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">♥ 結婚の先にある人生まで</div>
 
-            <div class="event-item">
-              <small>開催時間</small>
-              <strong>14:00〜16:00</strong>
-            </div>
+          <h1>
+            結婚だけじゃない。<br>
+            <span>人生を、まるごと。</span>
+          </h1>
 
-            <div class="event-item">
-              <small>会場</small>
-              <strong>大阪市内</strong>
-            </div>
+          <p class="hero-lead">
+            お相手探しはもちろん、住まい、保険、家計、
+            再婚、子育てまで。<br>
+            結婚後に始まる暮らしを見据えて、
+            あなたの人生設計に寄り添う結婚相談所です。
+          </p>
 
-            <div class="event-item">
-              <small>参加費</small>
-              <strong>男性 5,000円 ／ 女性 3,000円</strong>
-            </div>
+          <div class="hero-buttons">
+            <a class="button button-primary" href="#contact">
+              無料相談を予約する
+            </a>
+
+            <a class="button button-secondary" href="party.html">
+              婚活パーティーを見る
+            </a>
           </div>
+        </div>
 
-          <form id="entryForm">
-            <div class="columns">
-              <div class="field">
-                <label for="name">
-                  お名前<span class="required">必須</span>
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="例：大阪 はなこ"
-                  autocomplete="name"
-                  required
-                >
-              </div>
+        <div class="hero-card">
+          <img
+            src="assets/konkatsu-hero.png"
+            alt="自然に話せる婚活パーティー"
+          >
 
-              <div class="field">
-                <label for="kana">
-                  ふりがな<span class="required">必須</span>
-                </label>
-                <input
-                  id="kana"
-                  name="kana"
-                  type="text"
-                  placeholder="例：おおさか はなこ"
-                  required
-                >
-              </div>
-            </div>
+          <div class="hero-badge">
+            結婚の先も
+            <strong>ずっと安心</strong>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <div class="columns">
-              <div class="field">
-                <label for="gender">
-                  参加区分<span class="required">必須</span>
-                </label>
-                <select id="gender" name="gender" required>
-                  <option value="">選択してください</option>
-                  <option value="男性">男性</option>
-                  <option value="女性">女性</option>
-                  <option value="その他・回答しない">その他・回答しない</option>
-                </select>
-              </div>
+    <section class="trust-strip">
+      <div class="container trust-grid">
+        <div class="trust-item">
+          <strong>不動産の専門知識</strong>
+          <span>結婚後の住まい選びまで</span>
+        </div>
 
-              <div class="field">
-                <label for="age">
-                  年齢<span class="required">必須</span>
-                </label>
-                <input
-                  id="age"
-                  name="age"
-                  type="number"
-                  min="18"
-                  max="99"
-                  placeholder="例：35"
-                  required
-                >
-              </div>
-            </div>
+        <div class="trust-item">
+          <strong>FP2級</strong>
+          <span>家計と将来設計を整理</span>
+        </div>
 
-            <div class="field">
-              <label for="email">
-                メールアドレス<span class="required">必須</span>
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="example@email.com"
-                autocomplete="email"
-                required
-              >
-            </div>
+        <div class="trust-item">
+          <strong>保険の知識</strong>
+          <span>家族を守る備えを考える</span>
+        </div>
 
-            <div class="field">
-              <label for="phone">
-                電話番号<span class="required">必須</span>
-              </label>
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                placeholder="例：08012345678"
-                autocomplete="tel"
-                required
-              >
-            </div>
+        <div class="trust-item">
+          <strong>子育ての実体験</strong>
+          <span>再婚や子連れ婚にも寄り添う</span>
+        </div>
+      </div>
+    </section>
 
-            <div class="columns">
-              <div class="field">
-                <label for="area">お住まいの地域</label>
-                <input
-                  id="area"
-                  name="area"
-                  type="text"
-                  placeholder="例：大阪市"
-                  autocomplete="address-level2"
-                >
-              </div>
-
-              <div class="field">
-                <label for="job">職業</label>
-                <input
-                  id="job"
-                  name="job"
-                  type="text"
-                  placeholder="例：会社員、自営業"
-                >
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="message">趣味・ひとこと</label>
-              <textarea
-                id="message"
-                name="message"
-                placeholder="休日の過ごし方や趣味などをご記入ください"
-              ></textarea>
-            </div>
-
-            <label class="agreement">
-              <input id="agreement" type="checkbox" required>
-              <span>
-                参加規約および個人情報の取扱いに同意します。
-                営業・勧誘・迷惑行為を目的とした参加はできません。
-              </span>
-            </label>
-
-            <button class="submit-button" type="submit">
-              ♥ 参加を申し込む
-            </button>
-          </form>
-
-          <p class="privacy">
-            🔒 ご入力いただいた情報は、本イベントの運営・連絡のみに使用します。
+    <section id="concept" class="section section-white">
+      <div class="container">
+        <div class="section-heading">
+          <small>OUR CONCEPT</small>
+          <h2>結婚相手を見つけるだけでは、<br>本当の安心とはいえないから。</h2>
+          <p>
+            結婚はゴールではなく、新しい暮らしのスタートです。
           </p>
         </div>
 
-        <section id="completeArea" class="complete">
-          <div class="complete-icon">✓</div>
+        <div class="concept-box">
+          <div class="concept-visual">
+            <div class="concept-message">
+              <strong>未来の暮らしまで一緒に考える。</strong>
+              出会いから結婚後まで、相談先が変わらない安心を。
+            </div>
+          </div>
 
-          <h2>お申し込み完了</h2>
+          <div class="concept-copy">
+            <h3>
+              「この人と結婚して、<br>
+              本当に幸せに暮らせるだろうか」
+            </h3>
 
-          <p class="complete-text">
-            当日は下のQRコードを<br>
-            受付スタッフにご提示ください。
+            <p>
+              結婚を考えるとき、多くの方が不安になるのは、
+              お相手との相性だけではありません。
+            </p>
+
+            <p>
+              どこに住むのか。家を買うのか。家計はどうするのか。
+              保険は必要なのか。子どもを育てていけるのか。
+            </p>
+
+            <p>
+              私たちは、婚活だけを切り離して考えません。
+              <span class="highlight">
+                出会い、結婚、住まい、お金、家族の未来まで
+              </span>
+              一緒に整理します。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="support" class="section section-soft">
+      <div class="container">
+        <div class="section-heading">
+          <small>WHOLE LIFE SUPPORT</small>
+          <h2>人生をまるごと支える<br>5つのサポート</h2>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <div class="service-icon">♥</div>
+            <h3>婚活</h3>
+            <p>
+              お相手探し、紹介、お見合い、交際から成婚まで伴走します。
+            </p>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon">⌂</div>
+            <h3>住まい</h3>
+            <p>
+              賃貸、購入、住み替えなど、新生活の住まいを一緒に考えます。
+            </p>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon">¥</div>
+            <h3>家計・FP</h3>
+            <p>
+              結婚後の生活費、貯蓄、住宅購入などの資金計画を整理します。
+            </p>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon">☂</div>
+            <h3>保険</h3>
+            <p>
+              家族構成や暮らしに合わせ、必要な備えを考えるお手伝いをします。
+            </p>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon">☺</div>
+            <h3>再婚・子育て</h3>
+            <p>
+              子連れ婚、再婚、家族関係の不安にも、実体験をもとに寄り添います。
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="representative" class="section section-white">
+      <div class="container profile">
+        <div class="profile-card">
+          <div class="profile-photo">☺</div>
+          <h3>代表者名</h3>
+          <p>
+            不動産事業者／結婚相談カウンセラー
+          </p>
+        </div>
+
+        <div class="profile-copy">
+          <div class="eyebrow">REPRESENTATIVE</div>
+
+          <h2>
+            資格だけではなく、<br>
+            家族をつくった経験があります。
+          </h2>
+
+          <p>
+            代表は不動産業に携わりながら、
+            FP2級や保険に関する資格を取得し、
+            多くの方の住まいや人生設計に向き合ってきました。
           </p>
 
-          <div class="entry-box">
-            <small>受付番号</small>
-            <strong id="entryNumber"></strong>
+          <p>
+            さらに、自身もお子さまのいる女性と結婚し、
+            家族として子どもを育て上げた経験があります。
+          </p>
+
+          <p>
+            理論だけでは分からない、再婚への不安、
+            子どもとの関係、家族になるまでの葛藤も理解しています。
+          </p>
+
+          <div class="qualification-list">
+            <div class="qualification-item">
+              <span>✓</span>
+              <span>不動産の実務経験</span>
+            </div>
+
+            <div class="qualification-item">
+              <span>✓</span>
+              <span>ファイナンシャル・プランニング技能士2級</span>
+            </div>
+
+            <div class="qualification-item">
+              <span>✓</span>
+              <span>保険に関する資格・実務知識</span>
+            </div>
           </div>
 
-          <div id="qrcode"></div>
+          <div class="family-box">
+            <strong>子持ちの女性との結婚・子育て経験</strong>
+            再婚や子連れ婚について、表面的なアドバイスではなく、
+            実際の生活を知る立場からお話を伺います。
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <p id="applicantName" class="applicant"></p>
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-heading">
+          <small>SUPPORT FLOW</small>
+          <h2>ご相談から成婚、その先まで</h2>
+        </div>
 
-          <div class="screenshot-note">
-            この画面をスクリーンショットして保存してください。
+        <div class="flow-grid">
+          <article class="flow-card">
+            <h3>無料相談</h3>
+            <p>
+              今のお悩みや結婚への希望を、ゆっくりお聞きします。
+            </p>
+          </article>
+
+          <article class="flow-card">
+            <h3>人生設計の整理</h3>
+            <p>
+              結婚観、仕事、住まい、お金、家族像を一緒に整理します。
+            </p>
+          </article>
+
+          <article class="flow-card">
+            <h3>婚活サポート</h3>
+            <p>
+              お相手探し、お見合い、交際中の相談まで伴走します。
+            </p>
+          </article>
+
+          <article class="flow-card">
+            <h3>成婚後のサポート</h3>
+            <p>
+              新居、家計、保険、家族についても引き続き相談できます。
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-white">
+      <div class="container">
+        <div class="party-panel">
+          <div class="party-copy">
+            <small>MATCHING PARTY</small>
+
+            <h2>
+              まずは気軽に、<br>
+              婚活パーティーから。
+            </h2>
+
+            <p>
+              一人参加、初参加も歓迎。
+              自然に会話できる少人数制のイベントです。
+            </p>
+
+            <a class="button party-button" href="party.html">
+              パーティーに申し込む
+            </a>
           </div>
 
-          <button
-            class="reset-button"
-            type="button"
-            onclick="location.reload()"
+          <img
+            src="assets/konkatsu-hero.png"
+            alt="婚活パーティー参加者募集"
           >
-            別の申込みを入力する
-          </button>
-        </section>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="cta-section">
+      <div class="container">
+        <div class="cta-box">
+          <div class="eyebrow">FREE CONSULTATION</div>
+
+          <h2>
+            結婚のことも、<br>
+            その先の人生も。
+          </h2>
+
+          <p>
+            まだ結婚するか迷っている方でも大丈夫です。
+            今の不安やこれから叶えたい暮らしについて、
+            まずは気軽にお話しください。
+          </p>
+
+          <a
+            class="button button-primary"
+            href="mailto:info@example.com?subject=無料相談の申込み"
+          >
+            無料相談を申し込む
+          </a>
+
+          <div class="note">
+            ※メールアドレス、代表者名、保有資格の正式名称は公開前に変更してください。
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <script>
-    const entryForm = document.getElementById("entryForm");
-    const formArea = document.getElementById("formArea");
-    const completeArea = document.getElementById("completeArea");
-    const entryNumberElement = document.getElementById("entryNumber");
-    const applicantNameElement = document.getElementById("applicantName");
-    const qrCodeElement = document.getElementById("qrcode");
-
-    entryForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      if (!entryForm.reportValidity()) {
-        return;
-      }
-
-      const formData = new FormData(entryForm);
-      const name = String(formData.get("name") || "").trim();
-      const gender = String(formData.get("gender") || "");
-      const timestamp = Date.now();
-      const randomNumber = Math.floor(1000 + Math.random() * 9000);
-
-      const entryNumber =
-        "OSK-" +
-        timestamp.toString().slice(-6) +
-        "-" +
-        randomNumber;
-
-      const qrData = JSON.stringify({
-        eventId: "OSAKA-MATCHING-20260808",
-        entryNumber,
-        name,
-        gender,
-        checkedIn: false
-      });
-
-      entryNumberElement.textContent = entryNumber;
-      applicantNameElement.textContent = name + " 様";
-
-      qrCodeElement.innerHTML = "";
-
-      new QRCode(qrCodeElement, {
-        text: qrData,
-        width: 220,
-        height: 220,
-        correctLevel: QRCode.CorrectLevel.H
-      });
-
-      formArea.style.display = "none";
-      completeArea.style.display = "grid";
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    });
-  </script>
+  <footer>
+    © 2026 人生まるごと結婚相談所
+  </footer>
 </body>
 </html>
