@@ -3,93 +3,163 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-  <title>婚活パーティー参加申込み</title>
+  <meta name="description" content="大阪開催の婚活パーティー参加申込みフォームです。申込み完了後に受付用QRコードを発行します。">
+  <title>婚活パーティー参加申込み｜大阪</title>
+
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
   <style>
+    :root {
+      --pink: #ef6580;
+      --pink-dark: #d94f6c;
+      --pink-light: #fff0f3;
+      --gold: #d9ad4c;
+      --brown: #49352e;
+      --text: #43363a;
+      --muted: #81757a;
+      --border: #f0d9df;
+      --white: #ffffff;
+    }
+
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
-        "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-      color: #2f2930;
+      color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Hiragino Sans",
+        "Yu Gothic",
+        "Meiryo",
+        sans-serif;
       background:
-        radial-gradient(circle at top left, #ffe7ef 0, transparent 35%),
-        radial-gradient(circle at bottom right, #eadfff 0, transparent 35%),
-        #fff9fb;
+        radial-gradient(circle at 10% 0%, #ffe9ef 0, transparent 32%),
+        radial-gradient(circle at 100% 100%, #fff0d9 0, transparent 30%),
+        #fffaf9;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
     }
 
     .page {
-      width: min(100% - 32px, 720px);
-      margin: 0 auto;
-      padding: 48px 0 80px;
+      width: min(1500px, calc(100% - 32px));
+      margin: 24px auto;
     }
 
-    .header {
-      text-align: center;
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(480px, .92fr);
+      min-height: calc(100vh - 48px);
+      overflow: hidden;
+      border: 1px solid rgba(239, 101, 128, .22);
+      border-radius: 28px;
+      background: var(--white);
+      box-shadow: 0 28px 90px rgba(97, 54, 66, .16);
+    }
+
+    .visual {
+      position: relative;
+      min-height: 760px;
+      background: #f9e7e8;
+    }
+
+    .visual img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 760px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .form-side {
+      padding: 42px;
+      background:
+        linear-gradient(rgba(255, 255, 255, .95), rgba(255, 255, 255, .97)),
+        radial-gradient(circle at top right, #ffe8ee, transparent 35%);
+    }
+
+    .form-header {
       margin-bottom: 28px;
+      text-align: center;
     }
 
-    .label {
-      display: inline-block;
-      padding: 6px 14px;
-      margin-bottom: 14px;
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 12px;
+      padding: 7px 15px;
       border-radius: 999px;
-      background: #fff;
-      color: #a74f73;
+      color: var(--pink-dark);
+      background: var(--pink-light);
       font-size: 13px;
-      font-weight: 700;
-      box-shadow: 0 8px 30px rgba(120, 67, 91, 0.1);
+      font-weight: 800;
+      letter-spacing: .08em;
     }
 
     h1 {
-      margin: 0 0 12px;
-      font-size: clamp(28px, 6vw, 42px);
-      line-height: 1.25;
+      margin: 0 0 10px;
+      color: var(--brown);
+      font-size: clamp(28px, 4vw, 38px);
+      line-height: 1.35;
     }
 
-    .lead {
+    .form-header p {
       margin: 0;
-      color: #766c72;
+      color: var(--muted);
       line-height: 1.8;
-    }
-
-    .card {
-      padding: 32px;
-      border: 1px solid rgba(255,255,255,.8);
-      border-radius: 28px;
-      background: rgba(255,255,255,.92);
-      box-shadow: 0 24px 70px rgba(110, 72, 90, 0.14);
-      backdrop-filter: blur(14px);
     }
 
     .event-info {
       display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
-      padding: 18px;
-      margin-bottom: 26px;
-      border-radius: 18px;
-      background: #fff5f8;
+      margin-bottom: 28px;
     }
 
-    .event-info div {
-      display: flex;
-      gap: 14px;
-      line-height: 1.6;
+    .event-item {
+      padding: 14px 15px;
+      border: 1px solid #f1dfe3;
+      border-radius: 14px;
+      background: #fff9fa;
     }
 
-    .event-info strong {
-      min-width: 70px;
-      color: #a74f73;
+    .event-item small {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--pink-dark);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .event-item strong {
+      color: var(--brown);
+      font-size: 14px;
+      line-height: 1.55;
     }
 
     form {
       display: grid;
-      gap: 20px;
+      gap: 19px;
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
     }
 
     .field {
@@ -98,412 +168,519 @@
     }
 
     .field label {
-      font-weight: 700;
+      color: var(--brown);
       font-size: 14px;
+      font-weight: 800;
     }
 
     .required {
-      margin-left: 6px;
-      color: #d94470;
-      font-size: 12px;
+      display: inline-block;
+      margin-left: 7px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      color: var(--pink-dark);
+      background: var(--pink-light);
+      font-size: 11px;
+      font-weight: 800;
     }
 
     input,
     select,
     textarea {
       width: 100%;
-      padding: 14px 15px;
-      border: 1px solid #e4dce0;
-      border-radius: 14px;
-      background: #fff;
-      font: inherit;
-      color: inherit;
+      border: 1px solid #ddd4d7;
+      border-radius: 12px;
+      color: var(--text);
+      background: var(--white);
       outline: none;
-      transition: .2s;
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+    }
+
+    input,
+    select {
+      height: 52px;
+      padding: 0 14px;
+    }
+
+    textarea {
+      min-height: 108px;
+      padding: 14px;
+      resize: vertical;
     }
 
     input:focus,
     select:focus,
     textarea:focus {
-      border-color: #ca6c91;
-      box-shadow: 0 0 0 4px rgba(202,108,145,.13);
+      border-color: var(--pink);
+      box-shadow: 0 0 0 4px rgba(239, 101, 128, .12);
     }
 
-    textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
-
-    .two-columns {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .check {
+    .agreement {
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      color: #62585e;
-      font-size: 14px;
+      padding: 15px;
+      border: 1px solid #eee1e4;
+      border-radius: 12px;
+      background: #fffafa;
+      color: #62555a;
+      font-size: 13px;
       line-height: 1.7;
     }
 
-    .check input {
-      width: 18px;
-      height: 18px;
-      margin-top: 3px;
+    .agreement input {
+      width: 19px;
+      height: 19px;
+      margin: 2px 0 0;
       flex: 0 0 auto;
+      accent-color: var(--pink);
     }
 
-    button {
+    .submit-button,
+    .reset-button {
       width: 100%;
-      padding: 16px;
+      min-height: 56px;
       border: 0;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #dc6d99, #9a65d4);
-      color: white;
+      border-radius: 14px;
+      color: var(--white);
+      background: linear-gradient(135deg, #f1718a, #e64f70);
       font-size: 17px;
-      font-weight: 800;
+      font-weight: 900;
+      letter-spacing: .04em;
       cursor: pointer;
-      box-shadow: 0 14px 30px rgba(174, 83, 135, .25);
-      transition: .2s;
+      box-shadow: 0 14px 30px rgba(224, 77, 107, .25);
+      transition: transform .2s, box-shadow .2s;
     }
 
-    button:hover {
+    .submit-button:hover,
+    .reset-button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 18px 36px rgba(174, 83, 135, .32);
+      box-shadow: 0 18px 36px rgba(224, 77, 107, .32);
+    }
+
+    .privacy {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      margin: 16px 0 0;
+      color: #8a7d81;
+      font-size: 12px;
+      text-align: center;
     }
 
     .complete {
       display: none;
+      min-height: 650px;
+      align-content: center;
       text-align: center;
     }
 
-    .complete h2 {
-      font-size: 28px;
-      margin: 0 0 10px;
+    .complete-icon {
+      display: grid;
+      width: 74px;
+      height: 74px;
+      margin: 0 auto 20px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--white);
+      background: linear-gradient(135deg, #f1718a, #e64f70);
+      font-size: 36px;
+      font-weight: 900;
+      box-shadow: 0 14px 35px rgba(224, 77, 107, .24);
     }
 
-    .complete p {
-      color: #746a70;
+    .complete h2 {
+      margin: 0 0 10px;
+      color: var(--brown);
+      font-size: 30px;
+    }
+
+    .complete-text {
+      margin: 0;
+      color: var(--muted);
       line-height: 1.8;
     }
 
-    .number-box {
-      margin: 22px 0;
+    .entry-box {
+      margin: 24px 0;
       padding: 18px;
-      border-radius: 16px;
-      background: #fff5f8;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--pink-light);
     }
 
-    .number-box small {
+    .entry-box small {
       display: block;
       margin-bottom: 5px;
-      color: #8a7c84;
+      color: var(--muted);
     }
 
-    .number-box strong {
+    .entry-box strong {
+      color: var(--pink-dark);
       font-size: 24px;
-      letter-spacing: 1px;
-      color: #a74f73;
+      letter-spacing: .08em;
     }
 
     #qrcode {
       width: fit-content;
       margin: 22px auto;
-      padding: 18px;
-      border-radius: 18px;
-      background: #fff;
-      box-shadow: 0 10px 35px rgba(82, 50, 65, .12);
+      padding: 17px;
+      border: 1px solid #eee;
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: 0 12px 32px rgba(70, 42, 49, .12);
     }
 
-    .notice {
-      padding: 14px;
-      border-radius: 14px;
-      background: #f7f4f8;
+    #qrcode img,
+    #qrcode canvas {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .applicant {
+      margin: 15px 0;
+      color: var(--brown);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .screenshot-note {
+      margin: 20px 0;
+      padding: 13px;
+      border-radius: 12px;
+      color: #75666b;
+      background: #f7f3f4;
       font-size: 13px;
     }
 
-    @media (max-width: 600px) {
+    .reset-button {
+      max-width: 360px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #9b858b, #77666b);
+      box-shadow: none;
+    }
+
+    @media (max-width: 1050px) {
       .page {
-        width: min(100% - 20px, 720px);
-        padding-top: 26px;
+        width: min(100% - 20px, 800px);
+        margin: 10px auto 30px;
       }
 
-      .card {
-        padding: 22px 18px;
-        border-radius: 22px;
+      .layout {
+        grid-template-columns: 1fr;
+        border-radius: 20px;
       }
 
-      .two-columns {
+      .visual {
+        min-height: auto;
+      }
+
+      .visual img {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        object-fit: contain;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page {
+        width: 100%;
+        margin: 0;
+      }
+
+      .layout {
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .form-side {
+        padding: 28px 18px 50px;
+      }
+
+      .columns,
+      .event-info {
         grid-template-columns: 1fr;
       }
-=======
-  <title>婚活パーティー｜素敵な出会いから結婚相談へ</title>
-  <meta name="description" content="気軽に参加できる婚活パーティー。自然な出会いから、希望する方には結婚相談所の無料相談もご案内します。">
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
-      color: #3d3035;
-      background: #fffaf7;
-      line-height: 1.7;
-    }
-    .hero {
-      min-height: 82vh;
-      display: grid;
-      place-items: center;
-      padding: 48px 20px;
-      text-align: center;
-      background: linear-gradient(135deg, #fff1ec, #fffaf7 55%, #f7ebe8);
-    }
-    .hero-inner { max-width: 760px; }
-    .label {
-      display: inline-block;
-      padding: 7px 18px;
-      border-radius: 999px;
-      background: #fff;
-      color: #b85f67;
-      font-weight: 700;
-      box-shadow: 0 6px 20px rgba(120,70,70,.1);
-    }
-    h1 {
-      margin: 24px 0 16px;
-      font-size: clamp(34px, 7vw, 64px);
-      line-height: 1.2;
-    }
-    h1 span { color: #c55d67; }
-    .lead {
-      margin: 0 auto 28px;
-      max-width: 600px;
-      font-size: 18px;
-    }
-    .button {
-      display: inline-block;
-      padding: 15px 34px;
-      border-radius: 999px;
-      background: #c55d67;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 700;
-      box-shadow: 0 10px 25px rgba(197,93,103,.25);
-    }
-    section {
-      max-width: 900px;
-      margin: auto;
-      padding: 70px 24px;
-    }
-    h2 {
-      text-align: center;
-      font-size: 30px;
-      margin-bottom: 34px;
-    }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 18px;
-    }
-    .card {
-      background: #fff;
-      padding: 26px;
-      border-radius: 18px;
-      box-shadow: 0 8px 28px rgba(80,50,50,.08);
-    }
-    .flow {
-      background: #f9eeee;
-      border-radius: 24px;
-      text-align: center;
-    }
-    footer {
-      padding: 30px 20px;
-      text-align: center;
-      font-size: 13px;
-      color: #837278;
->>>>>>> origin/main
-    }
-  
-    .hero-image-wrap {
-      margin-bottom: 26px;
-      overflow: hidden;
-      border-radius: 22px;
-      background: #fff;
-      box-shadow: 0 16px 42px rgba(120, 67, 91, 0.16);
-    }
 
-    .hero-image {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
+      h1 {
+        font-size: 27px;
+      }
 
-    @media (max-width: 600px) {
-      .hero-image-wrap {
-        margin: -4px -2px 22px;
-        border-radius: 16px;
+      .complete {
+        min-height: 560px;
       }
     }
-
   </style>
 </head>
+
 <body>
-<<<<<<< HEAD
   <main class="page">
-    <header class="header">
-      <div class="label">SPECIAL MATCHING EVENT</div>
-      <h1>婚活パーティー<br>参加申込み</h1>
-      <p class="lead">
-        お申し込み後、当日の受付に使用する<br>
-        QRコードを発行します。
-      </p>
-    </header>
-
-    <section class="card">
-      <div id="formArea">
-
-        <div class="hero-image-wrap">
-          <img
-            class="hero-image"
-            src="assets/konkatsu-hero.png"
-            alt="婚活パーティー 素敵な出会いをここから"
-          >
-        </div>
-
-        <div class="event-info">
-          <div><strong>開催日</strong><span>2026年8月8日（土）</span></div>
-          <div><strong>時間</strong><span>14:00〜16:00</span></div>
-          <div><strong>会場</strong><span>大阪市内</span></div>
-          <div><strong>参加費</strong><span>男性 5,000円 ／ 女性 3,000円</span></div>
-        </div>
-
-        <form id="entryForm">
-          <div class="field">
-            <label for="name">お名前<span class="required">必須</span></label>
-            <input id="name" name="name" type="text" placeholder="例：大阪 はなこ" required>
-          </div>
-
-          <div class="field">
-            <label for="kana">ふりがな<span class="required">必須</span></label>
-            <input id="kana" name="kana" type="text" placeholder="例：おおさか はなこ" required>
-          </div>
-
-          <div class="two-columns">
-            <div class="field">
-              <label for="gender">参加区分<span class="required">必須</span></label>
-              <select id="gender" name="gender" required>
-                <option value="">選択してください</option>
-                <option value="男性">男性</option>
-                <option value="女性">女性</option>
-                <option value="その他">その他・回答しない</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="age">年齢<span class="required">必須</span></label>
-              <input id="age" name="age" type="number" min="18" max="99" placeholder="例：35" required>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="email">メールアドレス<span class="required">必須</span></label>
-            <input id="email" name="email" type="email" placeholder="example@email.com" required>
-          </div>
-
-          <div class="field">
-            <label for="phone">電話番号<span class="required">必須</span></label>
-            <input id="phone" name="phone" type="tel" placeholder="09012345678" required>
-          </div>
-
-          <div class="field">
-            <label for="area">お住まいの地域</label>
-            <input id="area" name="area" type="text" placeholder="例：大阪市">
-          </div>
-
-          <div class="field">
-            <label for="job">職業</label>
-            <input id="job" name="job" type="text" placeholder="例：会社員、自営業">
-          </div>
-
-          <div class="field">
-            <label for="message">趣味・ひとこと</label>
-            <textarea id="message" name="message" placeholder="休日の過ごし方や趣味などをご記入ください"></textarea>
-          </div>
-
-          <label class="check">
-            <input type="checkbox" required>
-            <span>
-              参加規約および個人情報の取扱いに同意します。
-              迷惑行為や営業・勧誘目的での参加はできません。
-            </span>
-          </label>
-
-          <button type="submit">参加を申し込む</button>
-        </form>
+    <section class="layout">
+      <div class="visual">
+        <img
+          src="assets/konkatsu-hero.png"
+          alt="大阪で開催する婚活パーティーのご案内"
+        >
       </div>
 
-      <div id="completeArea" class="complete">
-        <div style="font-size:54px;">✓</div>
-        <h2>お申し込み完了</h2>
-        <p>
-          当日は下のQRコードを受付スタッフに<br>
-          ご提示ください。
-        </p>
+      <div class="form-side">
+        <div id="formArea">
+          <header class="form-header">
+            <div class="eyebrow">♥ OSAKA MATCHING EVENT</div>
+            <h1>参加申込みフォーム</h1>
+            <p>
+              必要事項をご入力のうえ、お申し込みください。<br>
+              完了後に当日の受付用QRコードを発行します。
+            </p>
+          </header>
 
-        <div class="number-box">
-          <small>受付番号</small>
-          <strong id="entryNumber"></strong>
+          <div class="event-info">
+            <div class="event-item">
+              <small>開催日</small>
+              <strong>2026年8月8日（土）</strong>
+            </div>
+
+            <div class="event-item">
+              <small>開催時間</small>
+              <strong>14:00〜16:00</strong>
+            </div>
+
+            <div class="event-item">
+              <small>会場</small>
+              <strong>大阪市内</strong>
+            </div>
+
+            <div class="event-item">
+              <small>参加費</small>
+              <strong>男性 5,000円 ／ 女性 3,000円</strong>
+            </div>
+          </div>
+
+          <form id="entryForm">
+            <div class="columns">
+              <div class="field">
+                <label for="name">
+                  お名前<span class="required">必須</span>
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="例：大阪 はなこ"
+                  autocomplete="name"
+                  required
+                >
+              </div>
+
+              <div class="field">
+                <label for="kana">
+                  ふりがな<span class="required">必須</span>
+                </label>
+                <input
+                  id="kana"
+                  name="kana"
+                  type="text"
+                  placeholder="例：おおさか はなこ"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="columns">
+              <div class="field">
+                <label for="gender">
+                  参加区分<span class="required">必須</span>
+                </label>
+                <select id="gender" name="gender" required>
+                  <option value="">選択してください</option>
+                  <option value="男性">男性</option>
+                  <option value="女性">女性</option>
+                  <option value="その他・回答しない">その他・回答しない</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="age">
+                  年齢<span class="required">必須</span>
+                </label>
+                <input
+                  id="age"
+                  name="age"
+                  type="number"
+                  min="18"
+                  max="99"
+                  placeholder="例：35"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="email">
+                メールアドレス<span class="required">必須</span>
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="example@email.com"
+                autocomplete="email"
+                required
+              >
+            </div>
+
+            <div class="field">
+              <label for="phone">
+                電話番号<span class="required">必須</span>
+              </label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="例：08012345678"
+                autocomplete="tel"
+                required
+              >
+            </div>
+
+            <div class="columns">
+              <div class="field">
+                <label for="area">お住まいの地域</label>
+                <input
+                  id="area"
+                  name="area"
+                  type="text"
+                  placeholder="例：大阪市"
+                  autocomplete="address-level2"
+                >
+              </div>
+
+              <div class="field">
+                <label for="job">職業</label>
+                <input
+                  id="job"
+                  name="job"
+                  type="text"
+                  placeholder="例：会社員、自営業"
+                >
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="message">趣味・ひとこと</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="休日の過ごし方や趣味などをご記入ください"
+              ></textarea>
+            </div>
+
+            <label class="agreement">
+              <input id="agreement" type="checkbox" required>
+              <span>
+                参加規約および個人情報の取扱いに同意します。
+                営業・勧誘・迷惑行為を目的とした参加はできません。
+              </span>
+            </label>
+
+            <button class="submit-button" type="submit">
+              ♥ 参加を申し込む
+            </button>
+          </form>
+
+          <p class="privacy">
+            🔒 ご入力いただいた情報は、本イベントの運営・連絡のみに使用します。
+          </p>
         </div>
 
-        <div id="qrcode"></div>
+        <section id="completeArea" class="complete">
+          <div class="complete-icon">✓</div>
 
-        <p id="applicantName"></p>
+          <h2>お申し込み完了</h2>
 
-        <div class="notice">
-          この画面をスクリーンショットして保存してください。
-        </div>
+          <p class="complete-text">
+            当日は下のQRコードを<br>
+            受付スタッフにご提示ください。
+          </p>
 
-        <button type="button" onclick="location.reload()" style="margin-top:22px;">
-          別の申込みを入力する
-        </button>
+          <div class="entry-box">
+            <small>受付番号</small>
+            <strong id="entryNumber"></strong>
+          </div>
+
+          <div id="qrcode"></div>
+
+          <p id="applicantName" class="applicant"></p>
+
+          <div class="screenshot-note">
+            この画面をスクリーンショットして保存してください。
+          </div>
+
+          <button
+            class="reset-button"
+            type="button"
+            onclick="location.reload()"
+          >
+            別の申込みを入力する
+          </button>
+        </section>
       </div>
     </section>
   </main>
 
   <script>
-    const form = document.getElementById("entryForm");
+    const entryForm = document.getElementById("entryForm");
+    const formArea = document.getElementById("formArea");
+    const completeArea = document.getElementById("completeArea");
+    const entryNumberElement = document.getElementById("entryNumber");
+    const applicantNameElement = document.getElementById("applicantName");
+    const qrCodeElement = document.getElementById("qrcode");
 
-    form.addEventListener("submit", function(event) {
+    entryForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
-      const name = document.getElementById("name").value.trim();
-      const gender = document.getElementById("gender").value;
+      if (!entryForm.reportValidity()) {
+        return;
+      }
+
+      const formData = new FormData(entryForm);
+      const name = String(formData.get("name") || "").trim();
+      const gender = String(formData.get("gender") || "");
       const timestamp = Date.now();
-      const random = Math.floor(1000 + Math.random() * 9000);
-      const entryNumber = "MP-" + timestamp.toString().slice(-6) + "-" + random;
+      const randomNumber = Math.floor(1000 + Math.random() * 9000);
+
+      const entryNumber =
+        "OSK-" +
+        timestamp.toString().slice(-6) +
+        "-" +
+        randomNumber;
 
       const qrData = JSON.stringify({
-        event: "婚活パーティー",
-        entryNumber: entryNumber,
-        name: name,
-        gender: gender,
+        eventId: "OSAKA-MATCHING-20260808",
+        entryNumber,
+        name,
+        gender,
         checkedIn: false
       });
 
-      document.getElementById("formArea").style.display = "none";
-      document.getElementById("completeArea").style.display = "block";
-      document.getElementById("entryNumber").textContent = entryNumber;
-      document.getElementById("applicantName").textContent = name + " 様";
+      entryNumberElement.textContent = entryNumber;
+      applicantNameElement.textContent = name + " 様";
 
-      document.getElementById("qrcode").innerHTML = "";
+      qrCodeElement.innerHTML = "";
 
-      new QRCode(document.getElementById("qrcode"), {
+      new QRCode(qrCodeElement, {
         text: qrData,
-        width: 210,
-        height: 210,
+        width: 220,
+        height: 220,
         correctLevel: QRCode.CorrectLevel.H
       });
+
+      formArea.style.display = "none";
+      completeArea.style.display = "grid";
 
       window.scrollTo({
         top: 0,
@@ -511,45 +688,5 @@
       });
     });
   </script>
-=======
-  <header class="hero">
-    <div class="hero-inner">
-      <div class="label">自然な出会いからはじめる婚活</div>
-      <h1>まずは楽しく、<br><span>会ってみませんか？</span></h1>
-      <p class="lead">
-        かしこまったお見合いではなく、会話を楽しむ婚活パーティーです。
-        素敵な出会いを探したい方も、婚活について相談してみたい方も、
-        気軽にご参加ください。
-      </p>
-      <a class="button" href="#entry">パーティーに申し込む</a>
-    </div>
-  </header>
-
-  <section>
-    <h2>こんな方におすすめ</h2>
-    <div class="cards">
-      <div class="card">婚活を始めたいけれど、何から始めればよいか分からない</div>
-      <div class="card">結婚相談所に入る前に、まずは気軽な出会いを体験したい</div>
-      <div class="card">安心できる場所で、真剣に結婚を考える人と出会いたい</div>
-    </div>
-  </section>
-
-  <section class="flow">
-    <h2>出会いから結婚までをサポート</h2>
-    <p>
-      婚活パーティーへの参加後、希望される方には無料の婚活相談をご案内します。
-      無理な勧誘は行わず、一人ひとりに合った婚活方法を一緒に考えます。
-    </p>
-  </section>
-
-  <section id="entry">
-    <h2>参加のお申し込み</h2>
-    <p style="text-align:center;">開催日時・会場・参加費・申込フォームは、こちらに掲載予定です。</p>
-  </section>
-
-  <footer>
-    © 婚活パーティー運営事務局
-  </footer>
->>>>>>> origin/main
 </body>
 </html>
